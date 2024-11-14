@@ -19,12 +19,17 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav gap-lg-3">
           <li class="nav-item">
-            <a class="nav-link text-white-hover" aria-current="page" href=""
+            <a
+              class="nav-link text-white-hover"
+              aria-current="page"
+              href="{% url 'home' %}"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white-hover" href="">About Us</a>
+            <a class="nav-link text-white-hover" href="{% url 'about_us' %}"
+              >About Us</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link text-white-hover" href="">Contact Us</a>
