@@ -1,0 +1,76 @@
+/* default */
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.text-justify {
+  text-align: justify;
+}
+
+/* custom color red */
+.bg-red {
+  background-color: #800;
+}
+.text-red {
+  color: #800;
+}
+.border-red {
+  border-color: #800 !important;
+}
+
+/* custom color yellow */
+.bg-yellow {
+  background-color: #f0e68c;
+}
+.text-yellow {
+  color: #f0e68c;
+}
+.text-yellow:hover {
+  color: #f0e68c;
+}
+
+/* transitions */
+.teacher-card {
+  transition: transform 0.3s ease;
+}
+.teacher-card:hover {
+  transform: translateY(-10px);
+}
+
+/* navbar */
+.text-white-hover {
+  color: white;
+}
+.text-white-hover:hover {
+  color: #f0e68c !important;
+}
+
+/* testimonials */
+.img-rounded {
+  height: 100px;
+  width: 100px;
+}
+.testimonials-position {
+  top: -50px;
+  left: 20px;
+}
+.testimonials-border {
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-right: 10px solid;
+  border-bottom: 10px solid;
+}
+
+/* scroll to top */
+#scrollToTop {
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
