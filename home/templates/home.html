@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 <div class="pt-5">
   <!-- jumbotron -->
   <section class="p-5">
@@ -24,7 +24,11 @@
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
-          <img src="" alt="img-jumbotron" class="img-fluid" />
+          <img
+            src="{% static 'images/jumbotron.png' %}"
+            alt="img-jumbotron"
+            class="img-fluid"
+          />
         </div>
       </div>
     </div>
