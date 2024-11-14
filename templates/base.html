@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nan.Edu</title>
+
+    <!-- boostrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- bootstrap icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD"
+      crossorigin="anonymous"
+    />
+
+    <!-- custom css -->
+    <link rel="stylesheet" href="assets/styles/style.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="bg-red fixed-top">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid mx-4 mx-lg-5">
+          <a class="text-yellow fw-bold fs-4 text-decoration-none" href="#"
+            >NAN.EDU</a
+          >
+          <button
+            class="navbar-toggler border-white"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="bi bi-list text-white fs-3"></i>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav gap-lg-3">
+              <li class="nav-item">
+                <a
+                  class="nav-link text-white-hover"
+                  aria-current="page"
+                  href="index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white-hover" href="pages/about.html"
+                  >About Us</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white-hover" href="pages/contact.html"
+                  >Contact Us</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white-hover" href="pages/faq.html"
+                  >FaQ</a
+                >
+              </li>
+              <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                <a
+                  class="btn btn-dark rounded-2 py-2 px-4 d-inline-block"
+                  href="pages/login.html"
+                  >Login</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- content -->
+    <main>{% block content %} {% endblock %}</main>
+
+    <!-- footer -->
+    <footer class="text-center text-lg-start bg-red text-white">
+      <div class="container p-4">
+        <div
+          class="row d-flex justify-content-center align-items-center gap-4 gap-md-0"
+        >
+          <div class="col-md-12 col-lg-6 mb-md-3 mb-lg-0">
+            <h5 class="text-uppercase mb-3">Nan.Edu</h5>
+            <p>
+              Kami adalah penyedia solusi edukasi ekonomi dan kursus manajemen
+              keuangan berbasis daring untuk meningkatkan kompetensi
+              di bidang keuangan
+            </p>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h5 class="mb-3">Sosial Media</h5>
+            <div
+              class="d-flex gap-4 justify-content-center justify-content-lg-start cursor-pointer"
+            >
+              <i class="bi bi-facebook fs-4 text-white-hover"></i>
+              <i class="bi bi-linkedin fs-4 text-white-hover"></i>
+              <i class="bi bi-instagram fs-4 text-white-hover"></i>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h5 class="my-3">Alamat</h5>
+            <div class="mb-2">
+              <span class="fw-bold">Gedung 1</span>
+              <p>Jl. Jend. Sudirman No. 16, Metro, AC 65312</p>
+            </div>
+            <div>
+              <span class="fw-bold">Gedung 2</span>
+              <p>Jl. Ahmad Yani No. 65, Minahasa Tenggara, GO 05399</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="text-center bg-dark p-2">Copyright &copy; 2024</p>
+      </div>
+
+      <!-- scroll to top -->
+      <button
+        id="scrollToTop"
+        class="btn btn-dark rounded-circle position-fixed d-none"
+      >
+        <i class="bi bi-arrow-up"></i>
+      </button>
+    </footer>
+
+    <!-- bootstrap js  -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- script js -->
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>
