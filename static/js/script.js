@@ -10,6 +10,18 @@ $(document).ready(function () {
     }
   });
 
+  // FORM
+  $(".needs-validation").on("submit", function (event) {
+    // cek validasi apakah semua input dalam form valid sesuai aturan HTML
+    if (!this.checkValidity()) {
+      // mencegah tindakan default dari event listener submit
+      event.stopPropagation(); // stop propagation untuk menghindari event lebih lanjut
+      event.preventDefault();
+    }
+    // class dari bootstrap untuk menampilkan elemen validasi
+    $(this).addClass("was-validated");
+  });
+
   // SCROLL TO TOP
   // menampilkan tombol ketika scroll ke bawah
   $(window).scroll(function () {

@@ -8,6 +8,16 @@
           <h2 class="mb-5 fw-bold text-red">Contact Us</h2>
         </div>
         <div class="row g-5 w-100">
+          <!-- pesan jika sukses atau error -->
+          {% if messages %} {% for message in messages %}
+          <div
+            class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-danger {% endif %}"
+            role="alert"
+          >
+            {{ message }}
+          </div>
+          {% endfor %} {% endif %}
+
           <div class="col-12 col-md-6 order-2 order-md-1">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.253830919441!2d106.80417657409643!3d-6.23022986101209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f15b30d89e2f%3A0x36d3e4c4cc53ad68!2sJl.%20Senopati%2C%20Kec.%20Kby.%20Baru%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sen!2sid!4v1727266836590!5m2!1sen!2sid"
@@ -47,34 +57,87 @@
             </div>
           </div>
 
-          <!-- pesan jika sukses -->
-          {% if messages %} {% for message in messages %}
-          <div
-            class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-danger {% endif %}"
-            role="alert"
-          >
-            {{ message }}
-          </div>
-          {% endfor %} {% endif %}
-
+          <!-- form -->
           <div class="col-md-6 order-1 order-md-2">
-            <form id="contactForm" method="POST" action="{% url 'contactus' %}">
+            <form
+              class="needs-validation"
+              method="POST"
+              action="{% url 'contactus' %}"
+              novalidate
+            >
               {% csrf_token %}
               <div class="mb-4">
-                {{ form.name }}
-                <div class="text-danger">{{ form.name.errors }}</div>
+                <!-- name -->
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control {% if form.name.errors %}is-invalid{% endif %}"
+                  value="{{ form.name.value|default_if_none:'' }}"
+                  placeholder="Name"
+                  required
+                />
+                {% if form.name.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.name.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+                </div>
+                {% endif %}
               </div>
+              <!-- phone -->
               <div class="mb-4">
-                {{ form.phone }}
-                <div class="text-danger">{{ form.phone.errors }}</div>
+                <input
+                  type="text"
+                  name="phone"
+                  class="form-control {% if form.phone.errors %}is-invalid{% endif %}"
+                  value="{{ form.phone.value|default_if_none:'' }}"
+                  placeholder="Phone"
+                  required
+                />
+                {% if form.phone.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.phone.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+                </div>
+                {% endif %}
               </div>
+              <!-- email -->
               <div class="mb-4">
-                {{ form.email }}
-                <div class="text-danger">{{ form.email.errors }}</div>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                  value="{{ form.email.value|default_if_none:'' }}"
+                  placeholder="Email"
+                  required
+                />
+                {% if form.email.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+                </div>
+                {% endif %}
               </div>
+              <!-- message -->
               <div class="mb-4">
-                {{ form.message }}
-                <div class="text-danger">{{ form.message.errors }}</div>
+                <textarea
+                  name="message"
+                  class="form-control {% if form.message.errors %}is-invalid{% endif %}"
+                  placeholder="Message"
+                  rows="6"
+                  required
+                >
+{{ form.message.value|default_if_none:"" }}</textarea
+                >
+                {% if form.message.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.message.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+                </div>
+                {% endif %}
               </div>
               <button type="submit" class="btn btn-dark">Send Message</button>
             </form>
