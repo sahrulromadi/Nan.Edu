@@ -8,5 +8,8 @@ class ContactUs(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = "Contact Us"
+
     def __str__(self):
         return f"Message from {self.name} ({self.email})"
