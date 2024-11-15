@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import ContactUsForm
+from django.contrib import messages
 
 def contactus(request):
     if request.method == 'POST':
         form = ContactUsForm(request.POST)
         if form.is_valid():
-            form.save()  # Menyimpan data ke database
-            return redirect('home')  # Arahkan ke halaman 
+            form.save() 
+            messages.success(request, "Form berhasil dikirim!")
+            return redirect('contactus') 
         else:
-            # Form tidak valid, tampilkan kembali dengan error
-            print(form.errors)
+            messages.error(request, "Form gagal dikirim! Pastikan format anda benar!")
     else:
         form = ContactUsForm()
 

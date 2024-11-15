@@ -47,13 +47,35 @@
             </div>
           </div>
 
+          <!-- pesan jika sukses -->
+          {% if messages %} {% for message in messages %}
+          <div
+            class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-danger {% endif %}"
+            role="alert"
+          >
+            {{ message }}
+          </div>
+          {% endfor %} {% endif %}
+
           <div class="col-md-6 order-1 order-md-2">
             <form id="contactForm" method="POST" action="{% url 'contactus' %}">
               {% csrf_token %}
-              <div class="mb-4">{{ form.name }}</div>
-              <div class="mb-4">{{ form.phone }}</div>
-              <div class="mb-4">{{ form.email }}</div>
-              <div class="mb-4">{{ form.message }}</div>
+              <div class="mb-4">
+                {{ form.name }}
+                <div class="text-danger">{{ form.name.errors }}</div>
+              </div>
+              <div class="mb-4">
+                {{ form.phone }}
+                <div class="text-danger">{{ form.phone.errors }}</div>
+              </div>
+              <div class="mb-4">
+                {{ form.email }}
+                <div class="text-danger">{{ form.email.errors }}</div>
+              </div>
+              <div class="mb-4">
+                {{ form.message }}
+                <div class="text-danger">{{ form.message.errors }}</div>
+              </div>
               <button type="submit" class="btn btn-dark">Send Message</button>
             </form>
           </div>
