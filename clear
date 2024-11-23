@@ -1,0 +1,16 @@
+[33m0c05418[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m fitur sign in by google dan reset password
+[33ma3c680d[m handle error di form login
+[33m6d7a6d7[m menambahkan package allauth untuk login dan register
+[33md5a0b4e[m[33m ([m[1;31morigin/main[m[33m)[m ganti nama plural di admin contact
+[33mf1cefe9[m memperbaiki tampilan pesan kesalahan di contact us
+[33m42fb729[m membuat custom form dan penanganan kesalahan di contact us
+[33mcb2defb[m membuat logic form di contact us
+[33md0c9088[m memperbaiki tampilan about us
+[33m6620ccb[m memperbaiki tampilan home
+[33m8136691[m memasukkan gambar
+[33mec8411a[m integrasi register dan login di apps accounts
+[33m42bc1df[m integrasi faq
+[33m7034b10[m integrasi contact us
+[33m56cf3df[m integrasi about us
+[33m4262956[m integrasi home
+[33mab1f608[m first commit

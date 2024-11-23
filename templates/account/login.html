@@ -33,7 +33,7 @@
       <div
         class="min-vh-100 d-flex justify-content-center align-items-center bg-light"
       >
-        <div class="container bg-white w-50 shadow-lg">
+        <div class="container bg-white col-10 col-md-6 shadow-lg">
           <div class="row">
             <div
               class="col-lg-6 py-3 px-4 d-flex flex-column justify-content-center position-relative"
@@ -64,7 +64,7 @@
 
                   {{ form.password|add_class:"form-control" }}
                 </div>
-                <div class="d-flex justify-content-end gap-3">
+                <div class="d-flex justify-content-end gap-3 mt-3 mt-md-0">
                   <a href="{% provider_login_url 'google' %}">
                     <i class="fs-4 bi-google"></i>
                   </a>
@@ -76,7 +76,7 @@
                   </a>
                 </div>
                 <div
-                  class="d-flex justify-content-between align-items-center mt-4 gap-2 flex-column flex-lg-row"
+                  class="d-flex justify-content-between align-items-center mt-3 mt-md-4 gap-2 flex-column flex-lg-row"
                 >
                   <button type="submit" class="btn btn-dark">Submit</button>
                   <a

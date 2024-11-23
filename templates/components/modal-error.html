@@ -17,14 +17,34 @@
         ></button>
       </div>
       <div class="modal-body">
-        {% for error in form.non_field_errors %}
-        <div class="alert alert-danger">{{ error }}</div>
-        {% endfor %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Tutup
-        </button>
+        <div class="alert alert-danger">
+          <!-- error karena salah data -->
+          {% if form.non_field_errors %}
+          <ul class="mb-0">
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          <!-- error karena tidak sesuai validasi -->
+          {% for field in form %} {% if field.errors %}
+          <ul class="mb-0">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Tutup
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+{% load widget_tweaks %} {% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +33,7 @@
       <div
         class="min-vh-100 d-flex justify-content-center align-items-center bg-light"
       >
-        <div class="container bg-white my-5 w-50 shadow-lg">
+        <div class="container bg-white my-5 col-10 col-md-6 shadow-lg">
           <div class="row">
             <div
               class="col-lg-6 py-3 px-4 d-flex flex-column justify-content-center position-relative"
@@ -51,69 +52,46 @@
                 Enter your details below to create an account.
               </p>
 
-              <form class="needs-validation" novalidate>
+              <form method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
                 <div class="mb-3 mt-4">
-                  <label for="exampleInputFullName" class="form-label"
-                    >Full Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="exampleInputFullName1"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please enter your full name.
-                  </div>
+                  <label class="form-label">Username</label>
+
+                  {{ form.username|add_class:"form-control" }}
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label"
                     >Email address</label
                   >
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please enter a valid email address.
-                  </div>
+                  {{ form.email|add_class:"form-control" }}
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label"
                     >Password</label
                   >
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please enter your password.
-                  </div>
+                  {{ form.password1|add_class:"form-control" }}
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputConfirmPassword1" class="form-label"
                     >Confirm Password</label
                   >
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputConfirmPassword1"
-                    required
-                  />
-                  <div class="invalid-feedback">
-                    Please confirm your password.
-                  </div>
+                  {{ form.password2|add_class:"form-control" }}
+                </div>
+                <div class="d-flex justify-content-end gap-3 mt-3 mt-md-0">
+                  <a href="{% provider_login_url 'google' %}">
+                    <i class="fs-4 bi-google"></i>
+                  </a>
+                  <a href="/">
+                    <i class="fs-4 bi bi-github"></i>
+                  </a>
+                  <a href="/">
+                    <i class="fs-4 bi bi-twitter"></i>
+                  </a>
                 </div>
                 <div
-                  class="d-flex justify-content-between align-items-center mt-5 gap-2 flex-column flex-lg-row"
+                  class="d-flex justify-content-between align-items-center mt-3 mt-md-4 flex-column flex-lg-row"
                 >
                   <button type="submit" class="btn btn-dark">Register</button>
-                  <a href="/" class="text-decoration-none">Forget password?</a>
                 </div>
               </form>
             </div>
@@ -131,7 +109,7 @@
             </div>
           </div>
           <div
-            class="d-flex justify-content-center align-items-center py-3 py-lg-2"
+            class="d-flex justify-content-center align-items-center pt-2 pb-3 py-lg-2"
           >
             <p class="mb-0 text-center">
               Already have an account?
@@ -143,6 +121,15 @@
         </div>
       </div>
     </main>
+
+    <!-- form error -->
+    <div
+      id="formErrors"
+      data-errors="{% if form.errors %}true{% else %}false{% endif %}"
+      style="display: none"
+    ></div>
+
+    {% include 'components/modal-error.html' %}
 
     <!-- bootstrap js  -->
     <script
