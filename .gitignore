@@ -59,7 +59,7 @@ coverage.xml
 migrations/
 
 # Settings and secrets
-settings.py
+nanedu/settings.py
 
 # PyCharm
 .idea/

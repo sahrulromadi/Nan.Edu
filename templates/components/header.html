@@ -62,10 +62,18 @@
               />
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-end"
+              class="dropdown-menu dropdown-menu-end mt-2"
               aria-labelledby="dropdownMenu"
             >
               <li>
+                {% if user.is_superuser %}
+                <a class="dropdown-item" href="admin:index"
+                  >Dashboard</a
+                >
+                {% endif %}
+                <a class="dropdown-item" href="{% url 'account_login' %}"
+                  >Profile</a
+                >
                 <a class="dropdown-item" href="{% url 'account_logout' %}"
                   >Logout</a
                 >
