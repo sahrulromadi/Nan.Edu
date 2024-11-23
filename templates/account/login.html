@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,47 +49,30 @@
               <h3 class="text-red fw-bold mb-5">Login</h3>
               <h5 class="fw-semibold">Welcome Back!</h5>
               <p class="text-muted">
-                Enter your email address and password to access your account.
+                Enter your username and password to access your account.
               </p>
 
-              <form class="needs-validation" novalidate>
+              <form method="post" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 <div class="mb-3 mt-4">
-                  <label for="exampleInputEmail1" class="form-label"
-                    >Email address</label
-                  >
-                  <!-- <input
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    required
-                  /> -->
-                  {{ form.login }}
-                  <div class="invalid-feedback">
-                    Please enter a valid email address.
-                  </div>
+                  <label class="form-label">Username</label>
+
+                  {{ form.login|add_class:"form-control" }}
                 </div>
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label"
-                    >Password</label
-                  >
-                  <!-- <input
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    required
-                  /> -->
-                  {{ form.password }}
-                  <div class="invalid-feedback">
-                    Please enter your password.
-                  </div>
+                  <label class="form-label">Password</label>
+
+                  {{ form.password|add_class:"form-control" }}
                 </div>
                 <div
                   class="d-flex justify-content-between align-items-center mt-5 gap-2 flex-column flex-lg-row"
                 >
                   <button type="submit" class="btn btn-dark">Submit</button>
-                  <a href="/" class="text-decoration-none">Forget password?</a>
+                  <a
+                    href="{% url 'account_reset_password' %}"
+                    class="text-decoration-none"
+                    >Forget password?</a
+                  >
                 </div>
               </form>
             </div>
@@ -118,6 +102,15 @@
         </div>
       </div>
     </main>
+
+    <!-- form error -->
+    <div
+      id="formErrors"
+      data-errors="{% if form.errors %}true{% else %}false{% endif %}"
+      style="display: none"
+    ></div>
+
+    {% include 'components/modal-error.html' %}
 
     <!-- bootstrap js  -->
     <script

@@ -57,4 +57,10 @@ $(document).ready(function () {
       }
     });
   });
+
+  // FORM ERROR
+  if ($("#formErrors").data("errors") === true) {
+    var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+    myModal.show();
+  }
 });
