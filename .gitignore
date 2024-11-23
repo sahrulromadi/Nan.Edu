@@ -1,0 +1,71 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+*.sqlite3-journal
+*.log
+
+# Local development environment
+.env
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# IDEs
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Static files and media files (optional, if you're using local storage)
+static/
+media/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Coverage reports
+.coverage
+*.coveragerc
+nosetests.xml
+coverage.xml
+*.hypothesis/
+*.tox/
+
+# Database files
+*.db
+*.sqlite3
+*.sqlite3-journal
+
+# Django migrations (optional)
+migrations/
+
+# Settings and secrets
+settings.py
+
+# PyCharm
+.idea/
+
+# Virtual environment folders (optional)
+env/
+.venv/
+venv/
+ENV/

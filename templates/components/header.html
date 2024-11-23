@@ -8,6 +8,8 @@
         href="{% url 'home' %}"
         >NAN.EDU</a
       >
+
+      <!-- navbar toggle untuk tampilan kecil -->
       <button
         class="navbar-toggler border-white"
         type="button"
@@ -19,6 +21,8 @@
       >
         <i class="bi bi-list text-white fs-3"></i>
       </button>
+
+      <!-- menu items -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav gap-lg-3">
           <li class="nav-item">
@@ -40,7 +44,7 @@
             >
           </li>
 
-          <!-- cek login atau belum -->
+          <!-- cek login atau belum (mode dekstop) -->
           {% if user.is_authenticated %}
           <li class="nav-item ms-lg-3 mt-2 mt-lg-0 dropdown">
             <a
@@ -71,7 +75,7 @@
           {% else %}
           <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
             <a
-              class="btn btn-dark rounded-2 py-2 px-4 d-inline-block"
+              class="btn btn-dark rounded-2 py-2 px-4"
               href="{% url 'account_login' %}"
               >Login</a
             >
