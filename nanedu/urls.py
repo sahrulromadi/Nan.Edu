@@ -17,9 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-# accounts
-from accounts import views as accounts_views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
@@ -27,7 +24,6 @@ urlpatterns = [
     path('contactus/', include('contactus.urls')),
     path('faq/', include('faq.urls')),
 
-    # login, register, logout dari accounts
-    path('login/', accounts_views.login, name='login'),
-    path('register/', accounts_views.register, name='register')
+    # allauth
+    path('accounts/', include('allauth.urls')),
 ]
