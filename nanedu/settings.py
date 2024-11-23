@@ -169,13 +169,29 @@ SITE_ID = 1
 # debug nanti di false
 DEBUG = True
 
-# custom form login menggunakan allauth
-# ACCOUNT_FORMS = {
-#     'login': 'accounts.forms.CustomLoginForm',
-# }
+# agar langsung ke logout
+ACCOUNT_LOGOUT_ON_GET = True
 
 # redirect setelah login
-LOGIN_REDIRECT_URL = 'aboutus'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
-# redirect jika mengakses login
-ACCOUNT_LOGIN_REDIRECT_URL = '/home/'
+# konfigurasi allauth
+# untuk melewati konfirm
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+# reset password
+# Contoh menggunakan SMTP Email Backend (untuk produksi)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'sahrull2047@gmail.com'
+EMAIL_HOST_PASSWORD = 'ubim zezf pxgg ejhl'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# meminta email tapi tidak verifikasi
+ACCOUNT_EMAIL_REQUIRED = True 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+ACCOUNT_PASSWORD_RESET_TIMEOUT = 60 * 60 * 24  # 1 hari

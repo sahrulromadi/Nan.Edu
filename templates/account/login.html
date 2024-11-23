@@ -1,4 +1,4 @@
-{% load widget_tweaks %}
+{% load widget_tweaks %} {% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -64,8 +64,19 @@
 
                   {{ form.password|add_class:"form-control" }}
                 </div>
+                <div class="d-flex justify-content-end gap-3">
+                  <a href="{% provider_login_url 'google' %}">
+                    <i class="fs-4 bi-google"></i>
+                  </a>
+                  <a href="/">
+                    <i class="fs-4 bi bi-github"></i>
+                  </a>
+                  <a href="/">
+                    <i class="fs-4 bi bi-twitter"></i>
+                  </a>
+                </div>
                 <div
-                  class="d-flex justify-content-between align-items-center mt-5 gap-2 flex-column flex-lg-row"
+                  class="d-flex justify-content-between align-items-center mt-4 gap-2 flex-column flex-lg-row"
                 >
                   <button type="submit" class="btn btn-dark">Submit</button>
                   <a
@@ -89,6 +100,7 @@
               />
             </div>
           </div>
+          <!-- register -->
           <div
             class="d-flex justify-content-center align-items-center py-3 py-lg-2"
           >
@@ -99,6 +111,7 @@
               >
             </p>
           </div>
+          <!-- register end -->
         </div>
       </div>
     </main>
