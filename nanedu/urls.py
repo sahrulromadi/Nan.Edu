@@ -20,8 +20,6 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from accounts import views as accounts_views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
@@ -32,8 +30,8 @@ urlpatterns = [
     # allauth
     path('accounts/', include('allauth.urls')),
 
-    # edit profile
-    path('edit-profile/', accounts_views.profile_update, name='edit_profile')
+    # profiles
+    path('profiles/', include('profiles.urls')),
 ]
 
 if settings.DEBUG:

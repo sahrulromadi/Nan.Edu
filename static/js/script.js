@@ -63,4 +63,29 @@ $(document).ready(function () {
     var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
     myModal.show();
   }
+
+  // PROFILE
+  // ambil gambar awal preview
+  let initialImageSrc = $("#profile-photo-preview").attr("src");
+
+  // Preview Foto saat dipilih
+  $("#profile-photo-input").on("change", function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        $("#profile-photo-preview").attr("src", e.target.result); // Update preview image
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Clear Button
+  $("#clearBtn").on("click", function () {
+    // Reset form terdekat dari tombol yang diklik
+    $(this).closest("form")[0].reset();
+
+    // Reset preview gambar
+    $("#profile-photo-preview").attr("src", initialImageSrc);
+  });
 });
