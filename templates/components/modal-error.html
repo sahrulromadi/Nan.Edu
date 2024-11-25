@@ -18,6 +18,7 @@
       </div>
       <div class="modal-body">
         <div class="alert alert-danger">
+          <!-- LOGIN DAN REGISTER -->
           <!-- error karena salah data -->
           {% if form.non_field_errors %}
           <ul class="mb-0">
@@ -29,6 +30,16 @@
 
           <!-- error karena tidak sesuai validasi -->
           {% for field in form %} {% if field.errors %}
+          <ul class="mb-0">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endfor %}
+
+          <!-- EDIT PROFILE -->
+          <!-- error karena tidak sesuai validasi -->
+          {% for field in user_form %} {% if field.errors %}
           <ul class="mb-0">
             {% for error in field.errors %}
             <li>{{ error }}</li>

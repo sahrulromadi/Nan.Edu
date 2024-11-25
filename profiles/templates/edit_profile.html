@@ -77,4 +77,12 @@
     </div>
   </section>
 </div>
-{% endblock %}
+
+<!-- form error -->
+<div
+  id="formErrors"
+  data-errors="{% if user_form.errors %}true{% else %}false{% endif %}"
+  style="display: none"
+></div>
+
+{% include 'components/modal-error.html' %} {% endblock %}
