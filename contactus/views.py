@@ -7,10 +7,10 @@ def contactus(request):
         form = ContactUsForm(request.POST)
         if form.is_valid():
             form.save() 
-            messages.success(request, "Form berhasil dikirim!")
+            messages.success(request, 'Pesan berhasil dikirim!', extra_tags='contactus')
             return redirect('contactus') 
         else:
-            messages.error(request, "Form gagal dikirim! Pastikan format anda benar!")
+            messages.error(request, 'Terjadi kesalahan.', extra_tags='contactus')
     else:
         form = ContactUsForm()
 

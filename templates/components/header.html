@@ -67,7 +67,7 @@
             >
               <li>
                 {% if user.is_superuser %}
-                <a class="dropdown-item" href="admin:index"
+                <a class="dropdown-item" href="{% url 'admin:index' %}"
                   >Dashboard</a
                 >
                 {% endif %}
