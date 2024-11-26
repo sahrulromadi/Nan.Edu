@@ -1,5 +1,6 @@
 # views.py
 from django.shortcuts import render
+from mentors.models import Mentor
 
 def aboutus(request):
     # Data FAQ
@@ -22,4 +23,6 @@ def aboutus(request):
         },
     ]
     
-    return render(request, 'aboutus.html', {'faq': faq})
+    mentors = Mentor.objects.all()
+
+    return render(request, 'aboutus.html', {'faq': faq, 'mentors': mentors})
