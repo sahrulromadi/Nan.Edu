@@ -36,16 +36,6 @@
             {% endfor %}
           </ul>
           {% endif %} {% endfor %}
-
-          <!-- EDIT PROFILE -->
-          <!-- error karena tidak sesuai validasi -->
-          {% for field in user_form %} {% if field.errors %}
-          <ul class="mb-0">
-            {% for error in field.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %} {% endfor %}
         </div>
         <div class="modal-footer">
           <button

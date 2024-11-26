@@ -4,6 +4,18 @@
 {% load widget_tweaks %}
 <div class="pt-5">
   <section class="container mt-5 mb-5">
+    <!-- handle -->
+    <!-- prettier-ignore -->
+    {% if messages %} 
+      {% for message in messages %} 
+        {% if 'profiles' in message.tags %}
+    <div
+      class="container alert {% if 'success' in message.tags %} alert-success {% else %} alert-danger {% endif %} mb-4"
+      style="max-width: 900px"
+    >
+      {{ message }}
+    </div>
+    {% endif %} {% endfor %} {% endif %}
     <div class="card shadow-lg mx-auto p-4 rounded-4" style="max-width: 900px">
       <!-- cancel -->
       <div class="position-absolute d-block" style="top: 5px; right: 20px">
@@ -77,12 +89,4 @@
     </div>
   </section>
 </div>
-
-<!-- form error -->
-<div
-  id="formErrors"
-  data-errors="{% if user_form.errors %}true{% else %}false{% endif %}"
-  style="display: none"
-></div>
-
-{% include 'components/modal-error.html' %} {% endblock %}
+{% endblock %}

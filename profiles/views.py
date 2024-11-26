@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm, ProfileForm
 from .models import Profile
+from django.contrib import messages
 
 @login_required
 def profile_view(request):
@@ -33,7 +34,10 @@ def profile_update(request):
             user_form.save()
             # Simpan perubahan profil (foto)
             profile_form.save()
+            messages.success(request, 'Profil berhasil diupdate!', extra_tags='profiles')
             return redirect('edit_profile') 
+        else:
+            messages.error(request, 'Username sudah digunakan!', extra_tags="profiles")
     else:
         # Jika bukan POST, buat form dengan data pengguna dan profil yang ada
         user_form = ProfileUpdateForm(instance=request.user)
