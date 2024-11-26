@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{ object.title }}</h1>
+{% if object.image %}
+<img
+  src="{{ object.image.url }}"
+  alt="{{ object.title }}"
+  style="max-width: 100%"
+/>
+{% endif %}
+<p>{{ object.content }}</p>
+<p><small>Diterbitkan pada: {{ object.created_at }}</small></p>
+{% endblock %}

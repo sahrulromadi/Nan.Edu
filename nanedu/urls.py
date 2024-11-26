@@ -26,12 +26,11 @@ urlpatterns = [
     path('aboutus/', include('aboutus.urls')),
     path('contactus/', include('contactus.urls')),
     path('faq/', include('faq.urls')),
+    path('profiles/', include('profiles.urls')),
+    path('news/', include('news.urls')),
 
     # allauth
     path('accounts/', include('allauth.urls')),
-
-    # profiles
-    path('profiles/', include('profiles.urls')),
 ]
 
 if settings.DEBUG:

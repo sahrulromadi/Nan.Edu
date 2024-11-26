@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Daftar Berita</h1>
+<ul>
+  {% for news in news_list %}
+  <li>
+    <h2><a href="{% url 'news_detail' news.pk %}">{{ news.title }}</a></h2>
+    <p>{{ news.content|truncatewords:20 }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
