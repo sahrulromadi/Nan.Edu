@@ -4,8 +4,8 @@ from .models import Mentor
 
 @admin.register(Mentor)
 class MentorAdmin(admin.ModelAdmin):
-    list_display = ('nama', 'photo_thumbnail')  # Tampilkan thumbnail foto di daftar admin
-    search_fields = ('nama', 'exp',)  # Fitur pencarian berdasarkan nama
+    list_display = ('name', 'photo_thumbnail')  # Tampilkan thumbnail foto di daftar admin
+    search_fields = ('name', 'experience',)  # Fitur pencarian berdasarkan nama
     readonly_fields = ('photo_preview',)  # Preview foto di form detail
 
     def photo_thumbnail(self, obj):

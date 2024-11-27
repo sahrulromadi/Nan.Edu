@@ -11,13 +11,13 @@
         <div class="teacher-card bg-white text-center p-3 rounded-4 shadow-lg">
           <img
             src="{% if mentor.photo %}{{ mentor.photo.url }}{% else %}{% static 'images/mentor-1.jpg' %}{% endif %}"
-            alt="{{ mentor.nama }}"
+            alt="{{ mentor.name }}"
             class="rounded-circle img-fluid border border-4 border-danger object-fit-cover mb-4"
             style="width: 150px; height: 150px"
           />
-          <h4 class="fw-bold">{{ mentor.nama }}</h4>
+          <h4 class="fw-bold">{{ mentor.name }}</h4>
           <p class="text-muted">
-            {{ mentor.exp|default:"Belum ada deskripsi" }}
+            {{ mentor.experience|default:"Belum ada deskripsi" }}
           </p>
           <div class="social-icons">
             <a
