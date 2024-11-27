@@ -2,6 +2,7 @@
 from django.db import models
 from videos.models import Video  # Mengimpor model Video dari aplikasi videos
 from django.contrib.auth.models import User
+from django.db.models import Max
 
 class Course(models.Model):
     title = models.CharField(max_length=200)
@@ -25,3 +26,12 @@ class CourseContent(models.Model):
 
     def __str__(self):
         return f"Content: {self.video.title if self.video else 'No video'} for {self.course.title}"
+
+    def save(self, *args, **kwargs):
+        # Jika order belum diset, otomatis berikan urutan berikutnya
+        if not self.order:
+            # Mengambil urutan konten tertinggi untuk kursus ini dan menambahkannya 1
+            max_order = CourseContent.objects.filter(course=self.course).aggregate(Max('order'))['order__max']
+            self.order = (max_order or 0) + 1
+        
+        super().save(*args, **kwargs)
