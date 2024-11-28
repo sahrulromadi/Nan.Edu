@@ -88,4 +88,42 @@ $(document).ready(function () {
     // Reset preview gambar
     $("#profile-photo-preview").attr("src", initialImageSrc);
   });
+
+  // SLIDER
+  let currentIndex = 0;
+  const cardWidth = $(".slider-row .col-12").outerWidth(true);
+  const totalCards = $(".slider-row .col-12").length;
+  const maxIndex = totalCards - 3; // Jumlah card yang dapat terlihat sekaligus (ubah sesuai kebutuhan)
+
+  // Fungsi untuk geser ke kanan
+  function slideNext() {
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+    } else {
+      currentIndex = 0; // Reset ke awal jika sudah mencapai akhir
+    }
+    $(".slider-row").css(
+      "transform",
+      `translateX(-${currentIndex * cardWidth}px)`
+    );
+  }
+
+  // Fungsi untuk geser ke kiri
+  function slidePrev() {
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = maxIndex; // Reset ke akhir jika sudah di awal
+    }
+    $(".slider-row").css(
+      "transform",
+      `translateX(-${currentIndex * cardWidth}px)`
+    );
+  }
+
+  // Event tombol next
+  $("#next-btn").click(slideNext);
+
+  // Event tombol previous
+  $("#prev-btn").click(slidePrev);
 });

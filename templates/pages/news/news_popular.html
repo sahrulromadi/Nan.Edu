@@ -1,0 +1,75 @@
+{% load static %}
+<div class="py-5 px-4 px-lg-0">
+  <div class="container">
+    <div
+      class="news-title d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-1 mb-md-4"
+    >
+      <p class="fs-1 fs-md-4 mb-4 mb-md-0 text-center">
+        <span class="text-red">Popular </span>News
+      </p>
+      <p class="text-end mb-2 mb-lg-0 mt-0 mt-md-4">
+        <a href="{% url 'news_list' %}" class="text-decoration-none text-black">
+          Lihat Semua
+        </a>
+      </p>
+    </div>
+    <div
+      class="news-grid position-relative slider-grid"
+      style="overflow-x: hidden; transition: transform 0.5s ease-in-out"
+    >
+      <!-- button -->
+      <button
+        class="btn btn-dark rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
+        id="prev-btn"
+        style="width: 35px; height: 35px"
+      >
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <button
+        class="btn btn-dark rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
+        id="next-btn"
+        style="width: 35px; height: 35px"
+      >
+        <i class="bi bi-arrow-right"></i>
+      </button>
+      <!-- button end -->
+      <div
+        class="row flex-nowrap slider-row"
+        style="transition: transform 0.5s ease-in-out"
+      >
+        <!-- card -->
+        {% for news in latest_news %}
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card shadow-sm mx-auto mt-6">
+            <img
+              src="{% if news.image %} {{ news.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
+              class="card-img-top object-fit-cover"
+              alt="News Image"
+              style="height: 200px"
+            />
+            <div class="card-body">
+              <h4 class="card-title mb-3">
+                <a
+                  href="{% url 'news_detail' news.pk %}"
+                  class="text-decoration-none text-red"
+                >
+                  {{ news.title|truncatechars:50 }}</a
+                >
+              </h4>
+              <p class="card-text text-justify">
+                {{ news.content|truncatechars:200 }}
+              </p>
+              <a href="{% url 'news_detail' news.pk %}" class="btn btn-dark">
+                Pelajari Lebih Lanjut
+              </a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-danger p-4 fs-5">Tidak ada berita terbaru</div>
+        {% endfor %}
+        <!-- card end -->
+      </div>
+    </div>
+  </div>
+</div>
