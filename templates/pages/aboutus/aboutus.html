@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
-<div class="pt-5">
+<section class="pt-5">
   <!-- about us -->
-  <section class="p-5">
+  <div class="py-5 px-4 px-lg-0">
     <div class="container">
       <div class="row d-flex gap-4 gap-md-0 align-items-center">
         <div class="col-md-6 text-center">
@@ -23,12 +23,12 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- our mentors -->
   {% include 'pages/aboutus/mentors_list.html' %}
 
   <!-- faq -->
   {% include 'pages/aboutus/faq.html' %}
-</div>
+</section>
 {% endblock %}

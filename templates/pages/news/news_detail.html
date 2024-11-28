@@ -1,12 +1,49 @@
-{% extends 'base.html' %} {% block content %}
-<h1>{{ object.title }}</h1>
-{% if object.image %}
-<img
-  src="{{ object.image.url }}"
-  alt="{{ object.title }}"
-  style="max-width: 100%"
-/>
-{% endif %}
-<p>{{ object.content }}</p>
-<p><small>Diterbitkan pada: {{ object.created_at }}</small></p>
+{% extends 'base.html' %} {% block content %} {% load static %}
+<section class="pt-5">
+  <div class="py-5 px-4 px-lg-0">
+    <div class="container d-flex flex-column gap-5">
+      <div class="row mt-0 mt-lg-3">
+        <div class="col-lg-8">
+          <div class="mb-5">
+            <h2>{{ news.title }}</h2>
+          </div>
+          <div class="mb-2">
+            <div class="d-flex justify-content-end mb-0 mb-lg-2">
+              <p class="text-muted">{{ news.created_at }}</p>
+            </div>
+          </div>
+          <div class="mb-5 mb-lg-0">
+            <img
+              src="{% if news.image %} {{ news.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
+              class="img-fluid rounded mb-4 object-fit-cover"
+              alt="News Image"
+              style="width: 100%; height: 400px"
+            />
+            <div>
+              <p class="text-justify">{{ news.content }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- recommended -->
+        <div class="col-lg-4 px-4">
+          <div class="card shadow-sm border-light">
+            <div class="card-header text-center bg-red text-white">
+              <h5 class="mb-0 text-light">Recommended News</h5>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <a href="" class="d-block text-decoration-none">
+                  <h6 class="text-red mb-1">lorem</h6>
+                </a>
+                <small class="text-muted"> lorem </small>
+              </div>
+              <hr />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

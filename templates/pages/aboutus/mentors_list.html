@@ -1,5 +1,5 @@
 {% load static %}
-<section class="py-5">
+<div class="py-5 px-4 px-lg-0">
   <div class="container text-center">
     <h2 class="mb-5 fw-semibold">
       Yuk berkenalan dengan <span class="text-red">para Mentor!</span>
@@ -10,7 +10,7 @@
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="teacher-card bg-white text-center p-3 rounded-4 shadow-lg">
           <img
-            src="{% if mentor.photo %}{{ mentor.photo.url }}{% else %}{% static 'images/mentor-1.jpg' %}{% endif %}"
+            src="{% if mentor.photo %}{{ mentor.photo.url }}{% else %}{% static 'images/mentor.jpg' %}{% endif %}"
             alt="{{ mentor.name }}"
             class="rounded-circle img-fluid border border-4 border-danger object-fit-cover mb-4"
             style="width: 150px; height: 150px"
@@ -40,4 +40,4 @@
       {% endfor %}
     </div>
   </div>
-</section>
+</div>
