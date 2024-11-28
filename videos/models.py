@@ -1,6 +1,6 @@
 # videos/models.py
 from django.db import models
-from django.apps import apps  # Mengimpor apps untuk mendapatkan model
+from django.apps import apps
 
 class Video(models.Model):
     title = models.CharField(max_length=200)

@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.apps import apps
 
 
 class Quiz(models.Model):
     title = models.CharField(max_length=255, help_text="Judul kuis")
     description = models.TextField(blank=True, help_text="Deskripsi singkat tentang kuis")
     created_at = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, related_name='quizzes', null=True, blank=True)
 
     def __str__(self):
         return self.title

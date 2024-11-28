@@ -1,8 +1,10 @@
 # courses/models.py
 from django.db import models
-from videos.models import Video  # Mengimpor model Video dari aplikasi videos
+from videos.models import Video  
+from quizzes.models import Quiz 
 from django.contrib.auth.models import User
 from django.db.models import Max
+from django.core.exceptions import ValidationError
 
 class Course(models.Model):
     title = models.CharField(max_length=200)
@@ -16,7 +18,8 @@ class Course(models.Model):
 
 class CourseContent(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='contents')
-    video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True)  # Konten berhubungan dengan video
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True)  
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True, blank=True)  
     order = models.PositiveIntegerField()  # Urutan konten dalam course
     created_at = models.DateTimeField(auto_now_add=True)  # Waktu pembuatan konten
     updated_at = models.DateTimeField(auto_now=True)  # Waktu update konten
@@ -35,3 +38,10 @@ class CourseContent(models.Model):
             self.order = (max_order or 0) + 1
         
         super().save(*args, **kwargs)
+
+    def clean(self):
+        # Validasi jika video dan quiz keduanya diisi
+        if self.video and self.quiz:
+            raise ValidationError("Konten hanya bisa memiliki satu antara video atau quiz.")
+        elif not self.video and not self.quiz:
+            raise ValidationError("Konten harus memiliki video atau quiz.")
