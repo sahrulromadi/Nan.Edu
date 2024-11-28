@@ -14,10 +14,10 @@ def profile_view(request):
         profile = Profile.objects.create(user=request.user)
 
     context = {
-        'user': request.user,  # Data pengguna
-        'profile': profile,    # Data profil (termasuk foto profil)
+        'user': request.user, 
+        'profile': profile,   
     }
-    return render(request, 'view_profile.html', context)
+    return render(request, 'pages/profiles/view_profile.html', context)
 
 def profile_update(request):
     # Periksa apakah pengguna memiliki profil. Jika tidak, buat profilnya.
@@ -25,7 +25,6 @@ def profile_update(request):
         request.user.profile = Profile.objects.create(user=request.user)
 
     if request.method == 'POST':
-        # Membuat form untuk pengguna dan profil (termasuk foto profil)
         user_form = ProfileUpdateForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
 
@@ -47,4 +46,4 @@ def profile_update(request):
         'user_form': user_form,
         'profile_form': profile_form,
     }
-    return render(request, 'edit_profile.html', context)
+    return render(request, 'pages/profiles/edit_profile.html', context)

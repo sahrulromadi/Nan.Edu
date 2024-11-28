@@ -6,5 +6,4 @@ class NewsConfig(AppConfig):
     name = 'news'
 
     def ready(self):
-        # Impor sinyal ketika aplikasi siap
         import news.signals

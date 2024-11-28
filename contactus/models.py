@@ -12,6 +12,7 @@ class ContactUs(models.Model):
     email = models.EmailField()
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=6,
         choices=STATUS_CHOICES,
@@ -22,4 +23,4 @@ class ContactUs(models.Model):
         verbose_name_plural = "Contact Us"
 
     def __str__(self):
-        return f"Message from {self.name} ({self.email})"
+        return f"Pesan dari {self.name} ({self.email})"

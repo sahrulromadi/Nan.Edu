@@ -11,6 +11,8 @@ class Course(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     user_has_access = models.ManyToManyField(User, related_name='courses_access')
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
 
     def __str__(self):
         return self.title
@@ -21,8 +23,8 @@ class CourseContent(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True)  
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True, blank=True)  
     order = models.PositiveIntegerField()  # Urutan konten dalam course
-    created_at = models.DateTimeField(auto_now_add=True)  # Waktu pembuatan konten
-    updated_at = models.DateTimeField(auto_now=True)  # Waktu update konten
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
 
     class Meta:
         ordering = ['order']  # Menentukan urutan konten berdasarkan field 'order'

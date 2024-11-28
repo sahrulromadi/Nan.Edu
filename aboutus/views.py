@@ -25,4 +25,4 @@ def aboutus(request):
     
     mentors = Mentor.objects.all()
 
-    return render(request, 'aboutus.html', {'faq': faq, 'mentors': mentors})
+    return render(request, 'pages/aboutus/aboutus.html', {'faq': faq, 'mentors': mentors})

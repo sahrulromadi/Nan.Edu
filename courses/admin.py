@@ -40,9 +40,11 @@ class CourseContentInline(admin.TabularInline):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'get_users_with_access')
+    list_display = ('title', 'price', 'created_at')
+    list_filter = ('created_at', 'updated_at',)
     search_fields = ('title', 'description')
     inlines = [CourseContentInline]
+    ordering = ('price', 'created_at',)
 
     def get_users_with_access(self, obj):
         return ", ".join([user.username for user in obj.user_has_access.all()])

@@ -3,10 +3,10 @@ from .models import News
 
 class NewsListView(ListView):
     model = News
-    template_name = 'news_list.html'
+    template_name = 'pages/news/news_list.html'
     context_object_name = 'news_list'
-    ordering = ['-created_at']  # Urutkan dari berita terbaru
+    ordering = ['-created_at']
 
 class NewsDetailView(DetailView):
     model = News
-    template_name = 'news_detail.html'
+    template_name = 'pages/news/news_detail.html'

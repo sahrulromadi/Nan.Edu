@@ -14,4 +14,4 @@ def contactus(request):
     else:
         form = ContactUsForm()
 
-    return render(request, 'contactus.html', {'form': form})
+    return render(request, 'pages/contactus/contactus.html', {'form': form})
