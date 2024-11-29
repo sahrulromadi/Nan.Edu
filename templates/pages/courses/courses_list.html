@@ -1,17 +1,28 @@
-{% load static %}
-<div class="py-5 px-4 px-lg-0">
-  <div class="container">
-    <div
-      class="course-title d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-1 mb-md-4"
-    >
-      <p class="fs-1 fs-md-4 mb-4 mb-md-0 text-center">
-        <span class="text-red">Popular </span>Course
-      </p>
-      <p class="text-end mb-2 mb-lg-0 mt-0 mt-md-4">Lihat Semua</p>
-    </div>
-    <div class="course-grid" style="overflow-x: hidden">
-      <div class="row flex-nowrap">
-        <!-- card -->
+{% extends 'base.html' %} {% block content %} {% load static %}
+<section class="pt-5">
+  <div class="py-5 px-4 px-lg-0">
+    <div class="container d-flex flex-column gap-5">
+      <!-- Title -->
+      <h1 class="text-center text-red fw-bolder">List News</h1>
+      <!-- Search -->
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="col-12">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+            <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Search news..."
+            />
+          </div>
+        </div>
+      </div>
+      <!-- content -->
+      <div class="row g-4">
+        {% for course in courses_list %}
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card" style="min-width: 18rem">
             <img
@@ -54,8 +65,11 @@
             </div>
           </div>
         </div>
-        <!-- card end -->
+        {% empty %}
+        <div class="alert alert-danger p-4 fs-5">Tidak ada courses</div>
+        {% endfor %}
       </div>
     </div>
   </div>
-</div>
+</section>
+{% endblock %}

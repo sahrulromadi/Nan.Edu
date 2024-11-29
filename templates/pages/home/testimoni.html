@@ -1,0 +1,86 @@
+{% load static %}
+<div class="py-5 px-4 px-lg-0">
+  <div class="container d-flex gap-5 flex-column">
+    <h1 class="fw-bold text-center pb-4 text-red">Ulasan</h1>
+    <!-- Baris 1: Dua kolom -->
+    <div class="row mb-md-4 justify-content-between gap-5">
+      <div class="col-md-5 bg-white rounded-5 border-red testimonials-border">
+        <div class="position-relative">
+          <div class="position-absolute testimonials-position">
+            <img
+              src="{% static 'images/testimoni-1.png' %}"
+              alt="testimoni-1"
+              class="rounded-circle img-rounded border-bottom border-1 border-end border-5 border-red"
+            />
+          </div>
+          <div
+            class="d-flex flex-column pb-1 px-3 text-justify"
+            style="padding-top: 4rem"
+          >
+            <p>
+              “Saya sangat puas dengan kelas online ini! Materinya disampaikan
+              dengan jelas dan mudah dipahami. Instruktur sangat berpengalaman
+              dan selalu siap membantu. Saya merasa lebih baik dalam mengatur
+              keuangan saya. Terima kasih!”
+            </p>
+            <p class="fw-bold text-end">— Rina, Pengusaha Kecantikan</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 bg-white rounded-5 testimonials-border border-red">
+        <div class="position-relative">
+          <div class="position-absolute testimonials-position">
+            <img
+              src="{% static 'images/testimoni-2.png' %}"
+              alt="testimoni-2"
+              class="rounded-circle img-rounded border-bottom border-1 border-end border-5 border-red"
+            />
+          </div>
+          <div
+            class="d-flex flex-column pb-1 px-3 text-justify"
+            style="padding-top: 4rem"
+          >
+            <p>
+              “Kelas ini sangat membantu kami dalam memperbaiki sistem manajemen
+              dan keuangan bisnis kami. Dengan materi yang mudah dipahami, kami
+              bisa mengimplementasikan perubahan yang signifikan dalam bisnis.
+              Bahkan setelah kelas selesai, kami masih bisa mengakses materi
+              kapan saja, sangat fleksibel!”
+            </p>
+            <p class="fw-bold text-end">— Rudi, Pengusaha Restoran</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Baris 2: Satu kolom -->
+    <div class="row justify-content-center">
+      <div class="col-md-8 bg-white rounded-5 testimonials-border border-red">
+        <div class="position-relative">
+          <div class="position-absolute testimonials-position">
+            <img
+              src="{% static 'images/testimoni-3.png' %}"
+              alt="testimoni-3"
+              class="rounded-circle img-rounded border-bottom border-1 border-end border-5 border-red"
+            />
+          </div>
+          <div
+            class="d-flex flex-column pb-1 px-3 text-justify"
+            style="padding-top: 4rem"
+          >
+            <p>
+              “Sebagai pengusaha, waktu saya sangat terbatas, tapi kelas online
+              ini memberikan fleksibilitas yang saya butuhkan. Materinya relevan
+              dan aplikatif, langsung bisa saya terapkan dalam bisnis saya. Saya
+              mendapatkan banyak insight baru tentang strategi manajemen yang
+              lebih efisien. Kelas ini benar-benar investasi yang sangat
+              berharga untuk perkembangan bisnis saya.”
+            </p>
+            <p class="fw-bold text-end">— Doni, Pemilik Usaha Retail</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,6 +27,7 @@ urlpatterns = [
     path('contactus/', include('contactus.urls')),
     path('profiles/', include('profiles.urls')),
     path('news/', include('news.urls')),
+    path('courses/', include('courses.urls')),
 
     # allauth
     path('accounts/', include('allauth.urls')),

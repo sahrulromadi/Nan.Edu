@@ -1,0 +1,41 @@
+{% load static %}
+<div class="py-5 px-4 px-lg-0">
+  <div class="container bg-yellow rounded-5 p-5">
+    <div class="d-flex flex-column gap-4">
+      <div
+        class="row row-cols-3 row-cols-md-6 align-items-center justify-content-center gap-md-5 mb-2 mb-lg-4"
+      >
+        <div class="col">
+          <img
+            src="{% static 'images/nanedu-financial.png' %}"
+            alt="financial"
+            class="img-fluid w-100"
+          />
+        </div>
+        <div class="col">
+          <img
+            src="{% static 'images/nanedu-business.png' %}"
+            alt="business"
+            class="img-fluid w-100"
+          />
+        </div>
+        <div class="col">
+          <img
+            src="{% static 'images/nanedu-planning.png' %}"
+            alt="planning"
+            class="img-fluid w-100"
+          />
+        </div>
+      </div>
+      <p class="text-center fs-6">
+        Jika anda memiliki pertanyaan seputar kelas, jangan ragu untuk
+        menghubungi kami
+      </p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-dark p-2 rounded-2">
+          Konsultasi dengan kami via WA
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

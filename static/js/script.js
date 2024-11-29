@@ -15,7 +15,6 @@ $(document).ready(function () {
     // cek validasi apakah semua input dalam form valid sesuai aturan HTML
     if (!this.checkValidity()) {
       // mencegah tindakan default dari event listener submit
-      event.stopPropagation(); // stop propagation untuk menghindari event lebih lanjut
       event.preventDefault();
     }
     // class dari bootstrap untuk menampilkan elemen validasi
@@ -126,4 +125,9 @@ $(document).ready(function () {
 
   // Event tombol previous
   $("#prev-btn").click(slidePrev);
+
+  // CHANGE EMAIL
+  $(".add-email").on("click", function () {
+    $(".change-email-form").toggleClass("d-none d-block");
+  });
 });
