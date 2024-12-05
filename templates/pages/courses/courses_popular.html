@@ -9,9 +9,34 @@
       </p>
       <p class="text-end mb-2 mb-lg-0 mt-0 mt-md-4">Lihat Semua</p>
     </div>
-    <div class="course-grid" style="overflow-x: hidden">
-      <div class="row flex-nowrap">
+    <div
+      class="course-grid position-relative slider-grid"
+      style="overflow-x: hidden; transition: transform 0.5s ease-in-out"
+    >
+      {% if courses %}
+      <!-- button -->
+      <button
+        class="btn btn-dark rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
+        id="prev-btn"
+        style="width: 35px; height: 35px"
+      >
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <button
+        class="btn btn-dark rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
+        id="next-btn"
+        style="width: 35px; height: 35px"
+      >
+        <i class="bi bi-arrow-right"></i>
+      </button>
+      <!-- button end -->
+      {% endif %}
+      <div
+        class="row flex-nowrap slider-row"
+        style="transition: transform 0.5s ease-in-out"
+      >
         <!-- card -->
+        {% for news in latest_courses %}
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card" style="min-width: 18rem">
             <img
@@ -54,6 +79,7 @@
             </div>
           </div>
         </div>
+        {% endfor %}
         <!-- card end -->
       </div>
     </div>

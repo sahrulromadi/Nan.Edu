@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from .models import Course, CourseContent
 from videos.models import Video
 from quizzes.models import Quiz
+from django.utils.html import format_html
 
 # Membuat form custom untuk CourseContent
 class CourseContentForm(forms.ModelForm):
