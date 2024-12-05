@@ -1,0 +1,122 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<section class="pt-5">
+  <div class="py-5 px-4 px-lg-0">
+    <div class="container d-flex flex-column">
+      <div class="row">
+        <!-- Main Course Content -->
+        <div class="col-md-7">
+          <!-- Video Player -->
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="course-section p-3 border">
+                {% if selected_content %} {% if selected_content.video %}
+                <!-- Video -->
+                <div
+                  class="video-container ratio ratio-16x9 flex-column align-items-center bg-black border mb-4"
+                  style="overflow: hidden"
+                >
+                  <iframe
+                    class="course-video object-fit-cover w-100 h-100"
+                    src="{{ selected_content.video.video_url }}"
+                    frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                  >
+                  </iframe>
+                </div>
+                <h4 class="fw-semibold">{{ selected_content.video.title }}</h4>
+                <p class="text-muted">
+                  {{ selected_content.video.description }}
+                </p>
+              </div>
+              {% endif %} {% else %}
+              <p class="alert alert-danger m-0">
+                Tidak ada konten yang tersedia.
+              </p>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Course Description -->
+          <div class="card my-4">
+            <div class="card-body">
+              <ul
+                class="nav nav-pills mb-4 d-flex flex-row justify-content-between justify-content-lg-start"
+              >
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    data-bs-toggle="pill"
+                    href="#description"
+                    >Deskripsi
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="pill" href="#instructor"
+                    >Instruktur</a
+                  >
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="description">
+                  <h4 class="mb-4">Deskripsi Kelas</h4>
+                  <p>{{ course.description }}</p>
+                </div>
+                <div class="tab-pane fade" id="instructor">
+                  <h4 class="mb-4">Tim Pengajar</h4>
+                  <p>
+                    Dibimbing oleh praktisi keuangan berpengalaman dari berbagai
+                    latar belakang industri.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-5">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Daftar Course</h5>
+            </div>
+            <div class="card-body p-0">
+              <div class="content-list">
+                {% for content in contents %}
+                <!-- item -->
+                <a
+                  class="content-item list-group-item list-group-item-action {% if content.id == selected_content.id %}bg-body-secondary border-start border-3 border-primary{% endif %}"
+                  href="{% if content.video %} ?content_id={{ content.id }} {% elif content.quiz %} {% url 'home' %} {% endif %}"
+                >
+                  <div class="d-flex align-items-center py-3 mx-4">
+                    <div class="flex-shrink-0 p-2">
+                      {% if content.video %}
+                      <i class="bi bi-play-btn"></i>
+                      {% elif content.quiz %}
+                      <i class="bi bi-pencil-square"></i>
+                      {% endif %}
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <h6 class="mb-0">
+                        <!-- prettier-ignore -->
+                        {% if content.video %} 
+                          {{ content.video.title }} 
+                        {% elif content.quiz %} 
+                          {{ content.quiz.title }} 
+                        {% endif %}
+                      </h6>
+                    </div>
+                  </div>
+                </a>
+                <!-- item end -->
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
