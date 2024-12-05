@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load humanize %}
 <div class="py-5 px-4 px-lg-0">
   <div class="container">
     <div
@@ -7,13 +7,17 @@
       <p class="fs-1 fs-md-4 mb-4 mb-md-0 text-center">
         <span class="text-red">Popular </span>Course
       </p>
-      <p class="text-end mb-2 mb-lg-0 mt-0 mt-md-4">Lihat Semua</p>
+      <p class="text-end mb-2 mb-lg-0 mt-0 mt-md-4">
+        <a href="{% url 'courses_list' %}" class="text-decoration-none text-black">
+          Lihat Semua
+        </a>
+      </p>
     </div>
     <div
       class="course-grid position-relative slider-grid"
       style="overflow-x: hidden; transition: transform 0.5s ease-in-out"
     >
-      {% if courses %}
+      {% if latest_courses %}
       <!-- button -->
       <button
         class="btn btn-dark rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
@@ -36,18 +40,18 @@
         style="transition: transform 0.5s ease-in-out"
       >
         <!-- card -->
-        {% for news in latest_courses %}
+        {% for course in latest_courses %}
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card" style="min-width: 18rem">
             <img
-              src="{% static 'images/img-login.png' %}"
+              src="{% if course.image %} {{ course.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
               class="card-img-top object-fit-cover"
               alt="Course Image"
               style="height: 28rem"
             />
             <div class="card-body pb-0">
               <p class="card-title text-center fw-semibold mb-5">
-                Belajar Zero Downtime Laravel Deployment Dengan Enjoy dan Github
+                {{ course.title }}
               </p>
               <ul class="list-group list-group-flush">
                 <li
@@ -55,7 +59,9 @@
                 >
                   <div>
                     <p class="badge bg-warning p-2">Diskon 50%</p>
-                    <p class="text-success">Rp300.000</p>
+                    <p class="text-success">
+                      Rp{{ course.price|floatformat:0|intcomma }}
+                    </p>
                   </div>
                   <div>
                     <p class="text-danger text-decoration-line-through">
@@ -72,13 +78,15 @@
                   </p>
                   <p>
                     <i class="bi bi-people fs-5"></i>
-                    <span>13</span>
+                    <span>{{ course.user_has_access.count }}</span>
                   </p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
+        {% empty %}
+        <div class="alert alert-danger p-4 fs-5">Tidak ada course terbaru</div>
         {% endfor %}
         <!-- card end -->
       </div>
