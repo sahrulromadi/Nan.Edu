@@ -30,10 +30,7 @@ def quiz_detail(request, quiz_id):
             QuizResult.objects.create(
                 user=request.user,
                 quiz=quiz,
-                question=question,
-                selected_answer=selected_answer,
-                is_correct=is_correct,
-                score=score
+                score=score,
             )   
             
             # Arahkan ke halaman hasil quiz setelah pengisian

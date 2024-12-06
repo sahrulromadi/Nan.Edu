@@ -38,9 +38,6 @@ class Answer(models.Model):
 class QuizResult(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quiz_results')
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='results')
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='results')
-    selected_answer = models.ForeignKey(Answer, on_delete=models.SET_NULL, null=True, blank=True, related_name='results')
-    is_correct = models.BooleanField(default=False)
     score = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

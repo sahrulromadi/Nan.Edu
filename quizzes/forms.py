@@ -19,4 +19,4 @@ class QuizForm(forms.Form):
 class QuizResultForm(forms.ModelForm):
     class Meta:
         model = QuizResult
-        fields = ['score', 'is_correct']
+        fields = ['score']
