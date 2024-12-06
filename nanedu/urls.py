@@ -28,6 +28,7 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
     path('news/', include('news.urls')),
     path('courses/', include('courses.urls')),
+    path('quiz/', include('quizzes.urls')),
 
     # allauth
     path('accounts/', include('allauth.urls')),

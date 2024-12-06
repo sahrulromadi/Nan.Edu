@@ -41,6 +41,7 @@ class QuizResult(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='results')
     selected_answer = models.ForeignKey(Answer, on_delete=models.SET_NULL, null=True, blank=True, related_name='results')
     is_correct = models.BooleanField(default=False)
+    score = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

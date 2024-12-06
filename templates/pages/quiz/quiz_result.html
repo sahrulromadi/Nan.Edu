@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+<section class="pt-5">
+  <div class="py-5 px-4 px-lg-0">
+    <div class="container d-flex flex-column">
+      <div
+        class="bg-body-secondary py-4 px-3 p-md-5 rounded-5 d-flex flex-column justify-content-center"
+      >
+        <h1 class="text-center mb-5">Hasil Quiz {{ quiz.title }}</h1>
+        <p>Total Skor: {{ total_score }}</p>
+
+        <div class="text-center mt-4">
+          <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="start_again" class="btn btn-primary">
+              Mulai Lagi
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
