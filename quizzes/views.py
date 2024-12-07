@@ -61,7 +61,7 @@ def quiz_result(request, quiz_id):
 
     total_score = sum([result.score for result in quiz_results])
 
-     # Ambil semua pertanyaan dan jawabannya
+     # Untuk menampilkan jawaban user di quiz_result (fitur ini di nonaktifkan)
     questions_with_answers = []
     for question in quiz.questions.all():
         answers = question.answers.all()

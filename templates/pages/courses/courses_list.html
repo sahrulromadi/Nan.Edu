@@ -7,22 +7,60 @@
     <div class="container d-flex flex-column gap-5">
       <!-- Title -->
       <h1 class="text-center text-red fw-bolder">List Courses</h1>
-      <!-- Search -->
+
+      <!-- Search dan Filter -->
       <div class="d-flex align-items-center justify-content-center">
-        <div class="col-12">
+        <!-- Filter -->
+        <div class="dropdown me-3">
+          <button
+            class="btn btn-dark dropdown-toggle"
+            type="button"
+            id="filterDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-funnel-fill"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+            <li>
+              <a
+                class="dropdown-item {% if filter_option == 'all' %}active{% endif %}"
+                href="?filter=all&search={{ search_query }}"
+              >
+                Semua Courses
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item {% if filter_option == 'owned' %}active{% endif %}"
+                href="?filter=owned&search={{ search_query }}"
+              >
+                Courses Saya
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- Filter end -->
+
+        <!-- Search -->
+        <form method="get" class="flex-grow-1">
           <div class="input-group">
-            <span class="input-group-text">
-              <i class="bi bi-search"></i>
-            </span>
             <input
               type="text"
               name="search"
               class="form-control"
               placeholder="Search courses..."
+              value="{{ search_query }}"
             />
+            <button type="submit" class="input-group-text">
+              <i class="bi bi-search"></i>
+            </button>
           </div>
-        </div>
+          <input type="hidden" name="filter" value="{{ filter_option }}" />
+        </form>
+        <!-- Search end -->
       </div>
+
       <!-- content -->
       <div class="row g-4">
         {% for course in courses_list %}
@@ -55,7 +93,8 @@
                     </div>
                     <div>
                       <p class="text-danger text-decoration-line-through">
-                        Rp600.000
+                        <!-- prettier-ignore -->
+                        Rp{{ course.price|floatformat:0|add:course.price|intcomma }}
                       </p>
                     </div>
                   </li>

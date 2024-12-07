@@ -9,6 +9,30 @@ class CoursesListView(ListView):
     context_object_name = 'courses_list'
     ordering = ['-created_at']
 
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Course.objects.all().order_by('-created_at')  # Default: Semua courses
+
+        # Ambil filter dan search query dari GET parameter
+        filter_option = self.request.GET.get('filter', 'all')  # Default: 'all'
+        search_query = self.request.GET.get('search', '').strip()  # Default: kosong
+
+        # Filter courses berdasarkan kepemilikan
+        if filter_option == 'owned':
+            queryset = queryset.filter(user_has_access=user)
+
+        # Filter berdasarkan pencarian
+        if search_query:
+            queryset = queryset.filter(title__icontains=search_query)
+
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_option'] = self.request.GET.get('filter', 'all')  # Kirim filter ke template
+        context['search_query'] = self.request.GET.get('search', '')  # Kirim search ke template
+        return context
+
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'pages/courses/courses_detail.html'

@@ -45,48 +45,54 @@
         <!-- card -->
         {% for course in latest_courses %}
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card" style="min-width: 18rem">
-            <img
-              src="{% if course.image %} {{ course.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
-              class="card-img-top object-fit-cover"
-              alt="Course Image"
-              style="height: 28rem"
-            />
-            <div class="card-body pb-0">
-              <p class="card-title text-center fw-semibold mb-5">
-                {{ course.title }}
-              </p>
-              <ul class="list-group list-group-flush">
-                <li
-                  class="list-group-item d-flex flew-row justify-content-between align-items-center p-0 fw-semibold"
-                >
-                  <div>
-                    <p class="badge bg-warning p-2">Diskon 50%</p>
-                    <p class="text-success">
-                      Rp{{ course.price|floatformat:0|intcomma }}
+          <a
+            href="{% url 'courses_detail' course.pk %}"
+            class="text-decoration-none"
+          >
+            <div class="card" style="min-width: 18rem">
+              <img
+                src="{% if course.image %} {{ course.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
+                class="card-img-top object-fit-cover"
+                alt="Course Image"
+                style="height: 28rem"
+              />
+              <div class="card-body pb-0">
+                <p class="card-title text-center fw-semibold mb-5">
+                  {{ course.title }}
+                </p>
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item d-flex flew-row justify-content-between align-items-center p-0 fw-semibold"
+                  >
+                    <div>
+                      <p class="badge bg-warning p-2">Diskon 50%</p>
+                      <p class="text-success">
+                        Rp{{ course.price|floatformat:0|intcomma }}
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-danger text-decoration-line-through">
+                        <!-- prettier-ignore -->
+                        Rp{{ course.price|floatformat:0|add:course.price|intcomma }}
+                      </p>
+                    </div>
+                  </li>
+                  <li
+                    class="list-group-item d-flex flew-row justify-content-between align-items-center mt-2 p-0"
+                  >
+                    <p class="fw-semi-bold">
+                      <i class="bi bi-star-fill fs-5 text-warning"></i
+                      ><span class="ms-2"></span>5.0
                     </p>
-                  </div>
-                  <div>
-                    <p class="text-danger text-decoration-line-through">
-                      Rp600.000
+                    <p>
+                      <i class="bi bi-people fs-5"></i>
+                      <span>{{ course.user_has_access.count }}</span>
                     </p>
-                  </div>
-                </li>
-                <li
-                  class="list-group-item d-flex flew-row justify-content-between align-items-center mt-2 p-0"
-                >
-                  <p class="fw-semi-bold">
-                    <i class="bi bi-star-fill fs-5 text-warning"></i
-                    ><span class="ms-2"></span>5.0
-                  </p>
-                  <p>
-                    <i class="bi bi-people fs-5"></i>
-                    <span>{{ course.user_has_access.count }}</span>
-                  </p>
-                </li>
-              </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
         {% empty %}
         <div class="alert alert-danger p-4 fs-5">Tidak ada course terbaru</div>

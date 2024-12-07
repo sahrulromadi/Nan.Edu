@@ -60,8 +60,7 @@
                   </div>
                   <p class="text-muted m-0 px-2 px-lg-0 text-center">
                     <!-- prettier-ignore -->
-                    {% if user.first_name or user.last_name %} {{ user.first_name }} {{ user.last_name }} {% else %} Hello,
-                    User {% endif %}
+                    {% if user.first_name or user.last_name %} {{ user.first_name }} {{ user.last_name }} {% else %} Hello, {{ user.username }} {% endif %}
                   </p>
                 </div>
               </li>
@@ -91,29 +90,37 @@
           {% endif %}
           <li class="nav-item">
             <a
-              class="nav-link text-white-hover"
+              class="nav-link {% if request.resolver_match.view_name == 'home' %} text-yellow {% else %} text-white-hover {% endif %}"
               aria-current="page"
               href="{% url 'home' %}"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white-hover" href="{% url 'aboutus' %}"
+            <a
+              class="nav-link {% if request.resolver_match.view_name == 'aboutus' %} text-yellow {% else %} text-white-hover {% endif %}"
+              href="{% url 'aboutus' %}"
               >About Us</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white-hover" href="{% url 'contactus' %}"
+            <a
+              class="nav-link {% if request.resolver_match.view_name == 'contactus' %} text-yellow {% else %} text-white-hover {% endif %}"
+              href="{% url 'contactus' %}"
               >Contact Us</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white-hover" href="{% url 'courses_list' %}"
+            <a
+              class="nav-link {% if request.resolver_match.view_name == 'courses_list' or request.resolver_match.view_name == 'courses_detail' or request.resolver_match.view_name == 'quiz_detail' or request.resolver_match.view_name == 'quiz_result' %} text-yellow {% else %} text-white-hover {% endif %}"
+              href="{% url 'courses_list' %}"
               >Courses</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white-hover" href="{% url 'news_list' %}"
+            <a
+              class="nav-link {% if request.resolver_match.view_name == 'news_list' or request.resolver_match.view_name == 'news_detail' %} text-yellow {% else %} text-white-hover {% endif %}"
+              href="{% url 'news_list' %}"
               >News</a
             >
           </li>
