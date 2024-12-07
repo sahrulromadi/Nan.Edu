@@ -2,11 +2,17 @@ from django.shortcuts import render, redirect
 from .models import Quiz, QuizResult, Answer
 from .forms import QuizForm
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 @login_required 
 def quiz_detail(request, quiz_id):
     # Ambil quiz berdasarkan id
     quiz = Quiz.objects.get(id=quiz_id)
+
+    # Periksa apakah pengguna memiliki akses ke kursus terkait
+    if not quiz.course.user_has_access.filter(id=request.user.id).exists():
+        # Jika tidak memiliki akses, redirect ke halaman home
+        return redirect(reverse('home'))
     
     # Periksa apakah pengguna sudah mengerjakan quiz ini sebelumnya
     quiz_results = QuizResult.objects.filter(quiz=quiz, user=request.user)
@@ -45,10 +51,24 @@ def quiz_result(request, quiz_id):
     # Ambil quiz berdasarkan quiz_id
     quiz = Quiz.objects.get(id=quiz_id)
 
+    # Periksa apakah pengguna memiliki akses ke kursus terkait
+    if not quiz.course.user_has_access.filter(id=request.user.id).exists():
+        # Jika tidak memiliki akses, redirect ke halaman home
+        return redirect(reverse('home'))
+
     # Ambil hasil quiz berdasarkan quiz_id dan user yang sedang login
     quiz_results = QuizResult.objects.filter(quiz=quiz, user=request.user)
 
     total_score = sum([result.score for result in quiz_results])
+
+     # Ambil semua pertanyaan dan jawabannya
+    questions_with_answers = []
+    for question in quiz.questions.all():
+        answers = question.answers.all()
+        questions_with_answers.append({
+            'question': question,
+            'answers': answers
+        })
 
     # Tombol untuk mulai quiz lagi, menghapus hasil quiz sebelumnya
     if 'start_again' in request.POST:
@@ -61,4 +81,5 @@ def quiz_result(request, quiz_id):
         'quiz': quiz,
         'quiz_results': quiz_results,
         'total_score': total_score,
+        'questions_with_answers': questions_with_answers,
     })

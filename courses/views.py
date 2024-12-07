@@ -1,5 +1,7 @@
 from django.views.generic import ListView, DetailView
 from .models import Course, CourseContent
+from django.shortcuts import redirect
+from django.urls import reverse
 
 class CoursesListView(ListView):
     model = Course
@@ -10,12 +12,21 @@ class CoursesListView(ListView):
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'pages/courses/courses_detail.html'
-
     context_object_name = 'course'
+
+    def dispatch(self, request, *args, **kwargs):
+        course = self.get_object()  # Ambil objek Course berdasarkan pk yang ada di kwargs
+
+        # Periksa apakah pengguna memiliki akses ke kursus
+        if not course.user_has_access.filter(id=self.request.user.id).exists():
+            # Jika tidak memiliki akses, redirect ke halaman home
+            return redirect(reverse('home'))
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        course = self.get_object()
+        course = self.get_object() # mengambil course berdasarkan pk yang ada di kwargs
 
         # Ambil content_id dari query string, default ke konten pertama jika tidak ada
         content_id = self.request.GET.get('content_id')

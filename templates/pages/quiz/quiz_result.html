@@ -8,6 +8,24 @@
         <h1 class="text-center mb-5">Hasil Quiz {{ quiz.title }}</h1>
         <p>Total Skor: {{ total_score }}</p>
 
+        <h2 class="mt-5">Detail Pertanyaan dan Jawaban</h2>
+        <ul>
+          {% for item in questions_with_answers %}
+          <li>
+            <strong>{{ item.question.text }}</strong>
+            <ul>
+              {% for answer in item.answers %}
+              <li>
+                {{ answer.text }} {% if answer.is_correct %}
+                <span style="color: green">(Benar)</span>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+
         <div class="text-center mt-4">
           <form method="POST">
             {% csrf_token %}
