@@ -30,7 +30,7 @@ def quiz_detail(request, quiz_id):
                 selected_answer_id = form.cleaned_data[f'question_{question.id}']
                 selected_answer = Answer.objects.get(id=selected_answer_id)
                 is_correct = selected_answer.is_correct
-                score += 1 if is_correct else 0
+                score += 10 if is_correct else 0
             
             # Simpan total skor untuk quiz dan pengguna ini
             QuizResult.objects.create(

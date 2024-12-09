@@ -5,7 +5,8 @@ class Quiz(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, related_name='quizzes', null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, related_name='quizzes', null=False, blank=False)
 
     class Meta:
         verbose_name_plural = "Quiz"
@@ -18,10 +19,10 @@ class Question(models.Model):
         Quiz, 
         related_name='questions', 
         on_delete=models.CASCADE, 
-        default=1 
     )
     text = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.text
@@ -39,6 +40,7 @@ class QuizResult(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='results')
     score = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.quiz.title} - {self.question.text} (Jawaban: {self.is_correct})"
