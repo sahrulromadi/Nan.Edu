@@ -5,6 +5,7 @@ from quizzes.models import Quiz
 from django.contrib.auth.models import User
 from django.db.models import Max
 from django.core.exceptions import ValidationError
+from mentors.models import Mentor
 
 class Course(models.Model):
     title = models.CharField(max_length=200)
@@ -12,6 +13,7 @@ class Course(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='courses_images/', blank=True, null=True)
     user_has_access = models.ManyToManyField(User, related_name='courses_access')
+    mentor = models.ForeignKey(Mentor, on_delete=models.SET_NULL, null=True, blank=False, related_name='courses')
     created_at = models.DateTimeField(auto_now_add=True)  
     updated_at = models.DateTimeField(auto_now=True)  
 

@@ -53,7 +53,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-bs-toggle="pill" href="#instructor"
-                    >Instruktur</a
+                    >Mentor</a
                   >
                 </li>
               </ul>
@@ -63,13 +63,46 @@
                   <h4 class="mb-4">Deskripsi Kelas</h4>
                   <p>{{ course.description }}</p>
                 </div>
+                {% if course.mentor %}
                 <div class="tab-pane fade" id="instructor">
-                  <h4 class="mb-4">Tim Pengajar</h4>
-                  <p>
-                    Dibimbing oleh praktisi keuangan berpengalaman dari berbagai
-                    latar belakang industri.
-                  </p>
+                  <div class="card shadow border-0 text-center p-3 mb-4">
+                    <div class="card-body">
+                      <!-- prettier-ignore -->
+                      <img
+                        src="{% if course.mentor.photo %}{{ course.mentor.photo.url }}{% else %}{% static 'images/mentor.jpg' %}{% endif %}"
+                        alt="{{ course.mentor.name }}"
+                        class="rounded-circle img-fluid mb-3 object-fit-cover"
+                        style="width: 120px; height: 120px"
+                      />
+                      <h5 class="card-title fw-bold mb-2">
+                        {{ course.mentor.name }}
+                      </h5>
+                      <p class="text-muted mb-3">
+                        <!-- prettier-ignore -->
+                        {{ course.mentor.experience }}
+                      </p>
+                      <div class="d-flex justify-content-center gap-3">
+                        <a
+                          href="{{ course.mentor.linked_in }}"
+                          target="_blank"
+                          class="text-primary fs-5"
+                        >
+                          <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a
+                          href="{{ course.mentor.instagram }}"
+                          target="_blank"
+                          class="text-danger fs-5"
+                        >
+                          <i class="bi bi-instagram"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                {% else %}
+                <p>Tidak ada mentor</p>
+                {% endif %}
               </div>
             </div>
           </div>
