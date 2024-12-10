@@ -5,8 +5,9 @@ class Video(models.Model):
     title = models.CharField(max_length=200)
     video_url = models.URLField()
     description = models.TextField()
-    # Gunakan apps.get_model untuk mendapatkan model Course
-    course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, related_name='videos', null=True, blank=True)
+    course = models.ForeignKey('courses.Course', on_delete=models.CASCADE, related_name='videos', null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title

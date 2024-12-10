@@ -11,11 +11,11 @@ class CoursesListView(ListView):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = Course.objects.all().order_by('-created_at')  # Default: Semua courses
+        queryset = Course.objects.all().order_by('-created_at')  
 
         # Ambil filter dan search query dari GET parameter
-        filter_option = self.request.GET.get('filter', 'all')  # Default: 'all'
-        search_query = self.request.GET.get('search', '').strip()  # Default: kosong
+        filter_option = self.request.GET.get('filter', 'all')  
+        search_query = self.request.GET.get('search', '').strip()  
 
         # Filter courses berdasarkan kepemilikan
         if filter_option == 'owned':
@@ -29,8 +29,8 @@ class CoursesListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter_option'] = self.request.GET.get('filter', 'all')  # Kirim filter ke template
-        context['search_query'] = self.request.GET.get('search', '')  # Kirim search ke template
+        context['filter_option'] = self.request.GET.get('filter', 'all')  
+        context['search_query'] = self.request.GET.get('search', '')  
         return context
 
 class CourseDetailView(DetailView):
@@ -39,7 +39,7 @@ class CourseDetailView(DetailView):
     context_object_name = 'course'
 
     def dispatch(self, request, *args, **kwargs):
-        course = self.get_object()  # Ambil objek Course berdasarkan pk yang ada di kwargs
+        course = self.get_object()  
 
         # Periksa apakah pengguna memiliki akses ke kursus
         if not course.user_has_access.filter(id=self.request.user.id).exists():
@@ -50,7 +50,7 @@ class CourseDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        course = self.get_object() # mengambil course berdasarkan pk yang ada di kwargs
+        course = self.get_object() 
 
         # Ambil content_id dari query string, default ke konten pertama jika tidak ada
         content_id = self.request.GET.get('content_id')

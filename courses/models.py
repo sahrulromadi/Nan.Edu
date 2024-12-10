@@ -4,8 +4,8 @@ from videos.models import Video
 from quizzes.models import Quiz 
 from django.contrib.auth.models import User
 from django.db.models import Max
-from django.core.exceptions import ValidationError
 from mentors.models import Mentor
+from django.core.exceptions import ValidationError
 
 class Course(models.Model):
     title = models.CharField(max_length=200)
@@ -24,28 +24,40 @@ class CourseContent(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='contents')
     video = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True)  
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, null=True, blank=True)  
-    order = models.PositiveIntegerField()  # Urutan konten dalam course
+    order = models.PositiveIntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)  
     updated_at = models.DateTimeField(auto_now=True)  
 
     class Meta:
-        ordering = ['order']  # Menentukan urutan konten berdasarkan field 'order'
+        ordering = ['order']  
 
-    def __str__(self):
-        return f"Content: {self.video.title if self.video else 'No video'} for {self.course.title}"
+    def clean(self):
+        # Validasi agar 'order' tidak duplikat dalam kursus yang sama
+        if CourseContent.objects.filter(course=self.course, order=self.order).exclude(id=self.id).exists():
+            raise ValidationError(f"Urutan {self.order} sudah digunakan. Order tidak boleh sama")
+        
+        super().clean()
 
     def save(self, *args, **kwargs):
         # Jika order belum diset, otomatis berikan urutan berikutnya
         if not self.order:
-            # Mengambil urutan konten tertinggi untuk kursus ini dan menambahkannya 1
             max_order = CourseContent.objects.filter(course=self.course).aggregate(Max('order'))['order__max']
             self.order = (max_order or 0) + 1
-        
+
         super().save(*args, **kwargs)
 
-    def clean(self):
-        # Validasi jika video dan quiz keduanya diisi
-        if self.video and self.quiz:
-            raise ValidationError("Konten hanya bisa memiliki satu antara video atau quiz.")
-        elif not self.video and not self.quiz:
-            raise ValidationError("Konten harus memiliki video atau quiz.")
+        # Setelah menyimpan, pastikan urutan konten berurutan
+        self.reorder_contents()
+
+    def reorder_contents(self):
+        # Ambil semua konten dari kursus ini dan urutkan berdasarkan 'order'
+        contents = CourseContent.objects.filter(course=self.course).order_by('order')
+        
+        # Update urutan agar berurutan (tidak ada gap)
+        for index, content in enumerate(contents):
+            if content.order != index + 1:  # Jika urutan tidak sesuai
+                content.order = index + 1  # Sesuaikan urutan
+                content.save()
+
+    def __str__(self):
+        return str(self.order)

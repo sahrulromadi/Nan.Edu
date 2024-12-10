@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 from .models import Course, CourseContent
 from videos.models import Video
 from quizzes.models import Quiz
-from django.utils.html import format_html
 
 # Membuat form custom untuk CourseContent
 class CourseContentForm(forms.ModelForm):
@@ -13,6 +12,20 @@ class CourseContentForm(forms.ModelForm):
         model = CourseContent
         fields = ('video', 'quiz', 'order')
 
+    # agar courses menampilkan video dan quiz yang relevan (MASIH BELUM BISA)
+    def __init__(self, *args, **kwargs):
+        # Ambil 'course' dari initial atau instance
+        course = kwargs.pop('course', None)
+        super().__init__(*args, **kwargs)
+
+        if course:
+            self.fields['video'].queryset = Video.objects.filter(course=course)
+            self.fields['quiz'].queryset = Quiz.objects.filter(course=course)
+        else:
+            self.fields['video'].queryset = Video.objects.none()
+            self.fields['quiz'].queryset = Quiz.objects.none()
+
+    # handling
     def clean(self):
         cleaned_data = super().clean()
         video = cleaned_data.get('video')
@@ -21,34 +34,34 @@ class CourseContentForm(forms.ModelForm):
         # Validasi agar hanya satu yang diisi, video atau quiz
         if video and quiz:
             raise ValidationError("Konten hanya bisa memiliki satu antara video atau quiz.")
-        elif not video and not quiz:
-            raise ValidationError("Konten harus memiliki video atau quiz.")
 
         return cleaned_data
 
 # Inline untuk CourseContent dengan validasi form
 class CourseContentInline(admin.TabularInline):
     model = CourseContent
-    form = CourseContentForm  # Menetapkan form custom
+    form = CourseContentForm  
     extra = 1
-    fields = ('video', 'quiz', 'order')  # Menampilkan video dan quiz dalam form
-    # Menambahkan formfield_for_foreignkey agar memilih video dan quiz dengan mudah
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'video':
-            kwargs['queryset'] = Video.objects.all()  # Menampilkan semua video untuk dipilih
-        elif db_field.name == 'quiz':
-            kwargs['queryset'] = Quiz.objects.all()  # Menampilkan semua quiz untuk dipilih
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    fields = ('video', 'quiz', 'order')  
+
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+        if obj:
+            # Pastikan form menerima 'course' sebagai parameter tambahan
+            for form in formset.form.base_fields.values():
+                form.widget.attrs['data-course-id'] = obj.id
+            formset.form = type(formset.form)(
+                "CourseContentFormWithCourse",
+                (formset.form,),
+                {"__init__": lambda self, *args, **kwargs: CourseContentForm.__init__(self, *args, course=obj, **kwargs)},
+            )
+        return formset
 
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('title', 'price', 'created_at')
     list_filter = ('created_at', 'updated_at',)
     search_fields = ('title', 'description')
     inlines = [CourseContentInline]
-    ordering = ('price', 'created_at',)
-
-    def get_users_with_access(self, obj):
-        return ", ".join([user.username for user in obj.user_has_access.all()])
-    get_users_with_access.short_description = 'Users with access'
+    ordering = ('-created_at',)
 
 admin.site.register(Course, CourseAdmin)
