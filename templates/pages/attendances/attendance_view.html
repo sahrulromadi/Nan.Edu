@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<section class="pt-5">
+  <div class="py-5 px-4 px-lg-0">
+    <div class="container">
+      <!-- Heading -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="display-4 mb-4">Your Attendance Status</h2>
+        </div>
+      </div>
+
+      <!-- Attendance Message -->
+      <div class="row">
+        <div class="col-12 col-md-8 offset-md-2 text-center">
+          {% if attendance_exists %}
+          <div class="alert alert-success">
+            <h4 class="alert-heading">Attendance Marked</h4>
+            <p>You have already marked attendance for today.</p>
+          </div>
+          {% else %}
+          <div class="alert alert-info">
+            <h4 class="alert-heading">New Attendance</h4>
+            <p>Your attendance has been marked for today.</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Days Logged In -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <p class="lead">
+            Days logged in for the last 7 days:
+            <strong>{{ last_7_days }}</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- Access Message -->
+      <div class="row">
+        <div class="col-12 text-center">
+          {% if last_7_days >= 7 %}
+          <div class="alert alert-success">
+            <h4 class="alert-heading">Congratulations!</h4>
+            <p>You have earned access to <strong>Course #1</strong>!</p>
+          </div>
+          {% else %}
+          <div class="alert alert-warning">
+            <h4 class="alert-heading">Keep Going!</h4>
+            <p>Keep logging in to earn access to <strong>Course #1</strong>!</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
