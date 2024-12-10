@@ -1,0 +1,20 @@
+<div class="col-lg-4 px-4">
+  <div class="card shadow-sm border-light">
+    <div class="card-header text-center bg-red text-white">
+      <h5 class="mb-0 text-light">Recommended News</h5>
+    </div>
+    <div class="card-body">
+      {% for news in recommended_news %}
+      <div class="mb-3">
+        <a href="" class="d-block text-decoration-none">
+          <h6 class="text-red mb-1">{{ news.title }}</h6>
+        </a>
+        <small class="text-muted">{{ news.created_at|date:"d M Y" }}</small>
+        <hr />
+      </div>
+      {% empty %}
+      <p>No recommended news available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>

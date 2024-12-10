@@ -1,18 +1,20 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 <section class="pt-5">
-  <div class="py-5 px-4 px-lg-0">
+  <div class="py-5 px-3 px-lg-0">
     <div class="container d-flex flex-column">
       <!-- quiz form -->
       <div
         class="quiz bg-body-secondary py-4 px-3 p-md-5 rounded-5 d-flex flex-column justify-content-center"
       >
-        <h1 class="text-center mb-5">{{ quiz.title }}</h1>
+        <h1 class="text-center text-red mb-5 fw-bold">{{ quiz.title }}</h1>
         <form method="post" class="d-flex flex-column gap-4">
           {% csrf_token %}
           <!-- question -->
           {% for question in quiz.questions.all %}
-          <div class="question">
-            <p>{{ forloop.counter }}. {{ question.text }}</p>
+          <div class="question p-3 border rounded bg-white">
+            <p class="fw-semibold">
+              {{ forloop.counter }}. {{ question.text }}
+            </p>
             {% for answer in question.answers.all %}
             <div class="form-check">
               <input
@@ -20,14 +22,20 @@
                 type="radio"
                 name="question_{{ question.id }}"
                 value="{{ answer.id }}"
+                id="answer_{{ answer.id }}"
+                required
               />
-              <label class="form-check-label">{{ answer.text }}</label>
+              <label class="form-check-label" for="answer_{{ answer.id }}"
+                >{{ answer.text }}</label
+              >
             </div>
             {% endfor %}
           </div>
           {% endfor %}
           <!-- question end -->
-          <button type="submit" class="btn btn-dark ms-auto">Submit</button>
+          <button type="submit" class="btn btn-dark ms-auto mt-2 mt-lg-4">
+            Submit
+          </button>
         </form>
       </div>
       <!-- quiz form end -->

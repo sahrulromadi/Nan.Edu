@@ -1,5 +1,6 @@
 from django.views.generic import ListView, DetailView
 from .models import News
+import random
 
 class NewsListView(ListView):
     model = News
@@ -33,3 +34,13 @@ class NewsListView(ListView):
 class NewsDetailView(DetailView):
     model = News
     template_name = 'pages/news/news_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_news = News.objects.all()
+
+        # Pilih beberapa berita secara acak, misalnya 5 berita
+        recommended_news = random.sample(list(all_news), min(5, len(all_news)))
+
+        context['recommended_news'] = recommended_news
+        return context

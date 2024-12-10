@@ -1,18 +1,38 @@
 {% extends 'base.html' %} {% block content %}
 <section class="pt-5">
-  <div class="py-5 px-4 px-lg-0">
-    <div class="container d-flex flex-column">
-      <div
-        class="bg-body-secondary py-4 px-3 p-md-5 rounded-5 d-flex flex-column justify-content-center"
-      >
-        <h1 class="text-center mb-5">Hasil Quiz {{ quiz.title }}</h1>
-        <p>Total Skor: {{ total_score }}</p>
+  <div class="py-5 px-3 px-lg-0">
+    <div class="container d-flex flex-column col-12 col-md-8 col-lg-6">
+      <!-- Card untuk hasil quiz -->
+      <div class="bg-body-secondary py-4 px-3 p-md-5 rounded-5">
+        <h1 class="text-center mb-5">
+          Hasil Quiz: <strong>{{ quiz.title }}</strong>
+        </h1>
+        <h3 class="text-center text-info mb-4">
+          Total Skor: <strong>{{ total_score }}</strong>
+        </h3>
 
-        <div class="text-center mt-4">
+        <!-- Menampilkan jumlah soal benar dan salah -->
+        <div class="row mb-4">
+          <div class="col-12 col-md-6 text-center mb-1 mb-md-0">
+            <h5>
+              <i class="bi bi-check-circle text-success"></i> Benar:
+              <span class="badge bg-success">{{ correct_answers }}</span>
+            </h5>
+          </div>
+          <div class="col-12 col-md-6 text-center mb-0">
+            <h5>
+              <i class="bi bi-x-circle text-danger"></i> Salah:
+              <span class="badge bg-danger">{{ wrong_answers }}</span>
+            </h5>
+          </div>
+        </div>
+
+        <!-- Tombol untuk mulai lagi -->
+        <div class="text-center mt-3">
           <form method="POST">
             {% csrf_token %}
-            <button type="submit" name="start_again" class="btn btn-primary">
-              Mulai Lagi
+            <button type="submit" name="start_again" class="btn btn-dark mt-3">
+              Ulangi
             </button>
           </form>
         </div>

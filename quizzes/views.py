@@ -64,16 +64,16 @@ def quiz_result(request, quiz_id):
     # Ambil hasil quiz berdasarkan quiz_id dan user yang sedang login
     quiz_results = QuizResult.objects.filter(quiz=quiz, user=request.user)
 
+    if not quiz_result:
+        return redirect('quiz_detail', quiz_id=quiz.id)
+
+    # Total skor yang didapat
     total_score = sum([result.score for result in quiz_results])
 
-    # Untuk menampilkan jawaban user di quiz_result (fitur ini di nonaktifkan)
-    questions_with_answers = []
-    for question in quiz.questions.all():
-        answers = question.answers.all()
-        questions_with_answers.append({
-            'question': question,
-            'answers': answers
-        })
+    # Menghitung jawaban benar dan salah berdasarkan total skor
+    total_questions = quiz.questions.count()
+    correct_answers = round((total_score / 100) * total_questions) 
+    wrong_answers = total_questions - correct_answers  
 
     # Tombol untuk mulai quiz lagi, menghapus hasil quiz sebelumnya
     if 'start_again' in request.POST:
@@ -86,5 +86,6 @@ def quiz_result(request, quiz_id):
         'quiz': quiz,
         'quiz_results': quiz_results,
         'total_score': total_score,
-        'questions_with_answers': questions_with_answers,
+        'correct_answers': correct_answers,
+        'wrong_answers': wrong_answers,
     })
