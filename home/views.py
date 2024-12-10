@@ -18,7 +18,8 @@ def home(request):
     remaining_days_for_access = 0
     attendance_range = list(range(7))
 
-    show_modal = True # modal agar hanya tampil 1 kali
+    # Default show_modal menjadi False untuk user yang belum login
+    show_modal = False
 
     if request.user.is_authenticated:
         today = now().date()
@@ -49,6 +50,12 @@ def home(request):
             except Course.DoesNotExist:
                 # Tangani jika course dengan ID 1 tidak ditemukan
                 print("Course with ID 1 does not exist.")
+        
+        # Menggunakan session agar modal hanya muncul sekali
+        if not request.session.get('has_logged_in', False):
+            show_modal = True
+            # Menandai bahwa user sudah login, agar modal tidak muncul lagi di sesi berikutnya
+            request.session['has_logged_in'] = True
 
     context = {
         'latest_news': latest_news,
