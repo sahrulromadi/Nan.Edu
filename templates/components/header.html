@@ -43,11 +43,13 @@
                   style="width: 40px; height: 40px"
                 />
                 {% if courses_count < 1 %}
-                <span class="badge bg-success ms-1">Beginner</span>
-                {% elif courses_count >= 1 and courses_count <= 5 %}
-                <span class="badge bg-success ms-1">Elite</span>
+                <span class="badge bg-secondary ms-1">Pemula</span>
+                {% elif courses_count >= 1 and courses_count <= 3 %}
+                <span class="badge bg-warning ms-1">Menengah</span>
+                {% elif courses_count >= 4 and courses_count <= 5 %}
+                <span class="badge bg-info ms-1">Lanjutan</span>
                 {% elif courses_count > 5 %}
-                <span class="badge bg-success ms-1">Super</span>
+                <span class="badge bg-success ms-1">Ahli</span>
                 {% endif %}
               </div>
             </a>
