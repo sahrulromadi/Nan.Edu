@@ -29,7 +29,6 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('courses/', include('courses.urls')),
     path('quiz/', include('quizzes.urls')),
-    path('attendance/', include('attendances.urls')),
 
     # allauth
     path('accounts/', include('allauth.urls')),

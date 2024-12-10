@@ -1,4 +1,8 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
+
+<!-- prettier-ignore -->
+{% if show_modal %} {% include 'pages/home/attendance_view.html' %} {% endif %}
+
 <section class="pt-5">
   <!-- jumbotron -->
   {% include 'pages/home/jumbotron.html' %}
@@ -21,4 +25,5 @@
   <!-- testimoni -->
   {% include 'pages/home/testimoni.html' %}
 </section>
+
 {% endblock %}
