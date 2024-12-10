@@ -33,7 +33,7 @@ class Answer(models.Model):
     is_correct = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.text} (Jawaban: {self.is_correct})"
+        return f"Jawaban: {self.is_correct}"
 
 class QuizResult(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='quiz_results')
@@ -43,4 +43,4 @@ class QuizResult(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.quiz.title} - {self.question.text} (Jawaban: {self.is_correct})"
+        return f'{self.user.username} - {self.quiz.title} - {self.score}'

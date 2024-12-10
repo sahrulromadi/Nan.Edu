@@ -24,13 +24,18 @@ def quiz_detail(request, quiz_id):
     if request.method == 'POST':
         form = QuizForm(request.POST, quiz=quiz)
         if form.is_valid():
-            score = 0
-            # Simpan hasil per soal dan hitung skor total
+            correct_answers = 0
+            total_questions = quiz.questions.count()
+
+            # Hitung jumlah jawaban yang benar
             for question in quiz.questions.all():
                 selected_answer_id = form.cleaned_data[f'question_{question.id}']
                 selected_answer = Answer.objects.get(id=selected_answer_id)
-                is_correct = selected_answer.is_correct
-                score += 10 if is_correct else 0
+                if selected_answer.is_correct:
+                    correct_answers += 1
+
+            # Hitung skor dinamis
+            score = (correct_answers / total_questions) * 100
             
             # Simpan total skor untuk quiz dan pengguna ini
             QuizResult.objects.create(
@@ -61,7 +66,7 @@ def quiz_result(request, quiz_id):
 
     total_score = sum([result.score for result in quiz_results])
 
-     # Untuk menampilkan jawaban user di quiz_result (fitur ini di nonaktifkan)
+    # Untuk menampilkan jawaban user di quiz_result (fitur ini di nonaktifkan)
     questions_with_answers = []
     for question in quiz.questions.all():
         answers = question.answers.all()
