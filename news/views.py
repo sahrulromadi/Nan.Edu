@@ -10,13 +10,13 @@ class NewsListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get('search', '')
-        order_by = self.request.GET.get('order_by', 'desc')  # default to 'desc'
+        order_by = self.request.GET.get('order_by', 'desc')  
 
         # Filter berdasarkan urutan tanggal
         if order_by == 'asc':
-            queryset = queryset.order_by('created_at')  # Ascending order
+            queryset = queryset.order_by('created_at')  
         else:
-            queryset = queryset.order_by('-created_at')  # Descending order
+            queryset = queryset.order_by('-created_at') 
 
         # Pencarian berdasarkan judul
         if search_query:
