@@ -38,6 +38,13 @@ python -m venv env
 env\Scripts\activate
 ```
 
+> **Catatan:**  
+> Jika Anda menggunakan Windows, jalankan perintah berikut di PowerShell untuk memastikan bisa membuat env:
+>
+> ```
+> Set-ExecutionPolicy Unrestricted -Scope Process
+> ```
+
 ### 3. Menginstal Dependensi
 
 ```

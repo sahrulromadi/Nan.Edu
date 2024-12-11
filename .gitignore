@@ -33,7 +33,6 @@ env/
 Thumbs.db
 
 # Static files and media files (optional, if you're using local storage)
-static/
 media/
 
 # Python egg files

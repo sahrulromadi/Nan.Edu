@@ -30,6 +30,7 @@
                 Semua Courses
               </a>
             </li>
+            {% if user.is_authenticated %}
             <li>
               <a
                 class="dropdown-item {% if filter_option == 'owned' %}active{% endif %}"
@@ -38,6 +39,7 @@
                 Courses Saya
               </a>
             </li>
+            {% endif %}
           </ul>
         </div>
         <!-- Filter end -->
