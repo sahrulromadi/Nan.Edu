@@ -3,15 +3,10 @@
 *.pyo
 *.pyd
 __pycache__/
-*.db
-*.sqlite3
 
 # Django
 *.log
 *.pot
-*.pyc
-*.pyo
-*.pyd
 db.sqlite3
 *.sqlite3-journal
 *.log
@@ -55,14 +50,13 @@ coverage.xml
 *.sqlite3
 *.sqlite3-journal
 
-# Django migrations (optional)
-migrations/
+# Django migrations (include the folder but ignore __pycache__)
+*/migrations/__pycache__/
+!*/migrations/*.py
+!*/migrations/*.sql
 
 # Settings and secrets
 nanedu/settings.py
-
-# PyCharm
-.idea/
 
 # Virtual environment folders (optional)
 env/

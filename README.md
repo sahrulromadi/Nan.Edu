@@ -28,7 +28,7 @@ Nan.Edu adalah platform e-learning yang berfokus pada pengembangan pengetahuan d
 
 ```
 git clone https://github.com/sahrulromadi/Nan.Edu.git
-cd nan.Edu
+cd Nan.Edu
 ```
 
 ### 2. Membuat dan Mengaktifkan Virtual Environment (Disarankan)
