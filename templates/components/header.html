@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% include 'modals/logout_modal.html' %}
 <!-- header -->
 <header class="bg-red fixed-top">
   <nav class="navbar navbar-expand-lg">
@@ -23,119 +23,135 @@
       </button>
 
       <!-- menu items -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav gap-lg-3">
-          <!-- cek login atau belum (mode dekstop) -->
-          {% if user.is_authenticated %}
-          <li class="nav-item ms-lg-3 my-2 my-lg-0 dropdown order-lg-5">
-            <a
-              class="d-flex align-items-center text-decoration-none"
-              type="button"
-              id="dropdownMenu"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <div>
-                <img
-                  src="{% if user.profile.photo %}{{ user.profile.photo.url }}{% else %}{% static 'images/avatar.jpeg' %}{% endif %}"
-                  alt="Profile Picture"
-                  class="rounded-circle object-fit-cover"
-                  style="width: 40px; height: 40px"
-                />
-                {% if courses_count < 1 %}
-                <span class="badge bg-secondary ms-1">Pemula</span>
-                {% elif courses_count >= 1 and courses_count <= 3 %}
-                <span class="badge bg-warning ms-1">Menengah</span>
-                {% elif courses_count >= 4 and courses_count <= 5 %}
-                <span class="badge bg-info ms-1">Lanjutan</span>
-                {% elif courses_count > 5 %}
-                <span class="badge bg-success ms-1">Ahli</span>
-                {% endif %}
-              </div>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end mt-2 bg-secondary-subtle"
-              aria-labelledby="dropdownMenu"
-            >
-              <li class="mb-2">
-                <div
-                  class="d-flex flex-row align-items-center gap-2 justify-content-around px-3 py-2"
-                >
-                  <div>
-                    <img
-                      src="{% if user.profile.photo %}{{ user.profile.photo.url }}{% else %}{% static 'images/avatar.jpeg' %}{% endif %}"
-                      alt="Profile Picture"
-                      class="rounded-circle object-fit-cover d-none d-lg-block"
-                      style="width: 50px; height: 50px"
-                    />
-                  </div>
-                  <p class="text-muted m-0 px-2 px-lg-0 text-center">
-                    <!-- prettier-ignore -->
-                    {% if user.first_name or user.last_name %} {{ user.first_name }} {{ user.last_name }} {% else %} Hello, {{ user.username }} {% endif %}
-                  </p>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <!-- kanan -->
+        <div
+          class="d-flex justify-content-start justify-content-lg-end order-1 order-lg-5"
+        >
+          <ul class="navbar-nav gap-lg-3 w-100">
+            {% if user.is_authenticated %}
+            <li class="nav-item ms-lg-3 my-2 my-lg-0 dropdown order-lg-5">
+              <a
+                class="d-flex align-items-center text-decoration-none"
+                type="button"
+                id="dropdownMenu"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <div>
+                  <img
+                    src="{% if user.profile.photo %}{{ user.profile.photo.url }}{% else %}{% static 'images/avatar.jpeg' %}{% endif %}"
+                    alt="Profile Picture"
+                    class="rounded-circle object-fit-cover"
+                    style="width: 40px; height: 40px"
+                  />
+                  {% if courses_count < 1 %}
+                  <span class="badge bg-secondary ms-1">Pemula</span>
+                  {% elif courses_count >= 1 and courses_count <= 3 %}
+                  <span class="badge bg-warning ms-1">Menengah</span>
+                  {% elif courses_count >= 4 and courses_count <= 5 %}
+                  <span class="badge bg-info ms-1">Lanjutan</span>
+                  {% elif courses_count > 5 %}
+                  <span class="badge bg-success ms-1">Ahli</span>
+                  {% endif %}
                 </div>
-              </li>
-              <li class="bg-white py-2">
-                {% if user.is_superuser %}
-                <a class="dropdown-item" href="{% url 'admin:index' %}"
-                  >Dashboard</a
-                >
-                {% endif %}
-                <a class="dropdown-item" href="{% url 'view_profile' %}"
-                  >Profile</a
-                >
-                <a class="dropdown-item" href="{% url 'account_logout' %}"
-                  >Logout</a
-                >
-              </li>
-            </ul>
-          </li>
-          {% else %}
-          <li class="nav-item ms-lg-3 my-2 my-lg-0 order-lg-5">
-            <a
-              class="btn btn-dark rounded-2 py-2 px-4"
-              href="{% url 'account_login' %}"
-              >Login</a
-            >
-          </li>
-          {% endif %}
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.resolver_match.view_name == 'home' %} text-yellow {% else %} text-white-hover {% endif %}"
-              aria-current="page"
-              href="{% url 'home' %}"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.resolver_match.view_name == 'aboutus' %} text-yellow {% else %} text-white-hover {% endif %}"
-              href="{% url 'aboutus' %}"
-              >About Us</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.resolver_match.view_name == 'contactus' %} text-yellow {% else %} text-white-hover {% endif %}"
-              href="{% url 'contactus' %}"
-              >Contact Us</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.resolver_match.view_name == 'courses_list' or request.resolver_match.view_name == 'courses_detail' or request.resolver_match.view_name == 'quiz_detail' or request.resolver_match.view_name == 'quiz_result' %} text-yellow {% else %} text-white-hover {% endif %}"
-              href="{% url 'courses_list' %}"
-              >Courses</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link {% if request.resolver_match.view_name == 'news_list' or request.resolver_match.view_name == 'news_detail' %} text-yellow {% else %} text-white-hover {% endif %}"
-              href="{% url 'news_list' %}"
-              >News</a
-            >
-          </li>
-        </ul>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end mt-2 bg-secondary-subtle"
+                aria-labelledby="dropdownMenu"
+              >
+                <li class="mb-2">
+                  <div
+                    class="d-flex flex-row align-items-center gap-2 justify-content-end justify-content-lg-around px-3 py-2"
+                  >
+                    <div>
+                      <img
+                        src="{% if user.profile.photo %}{{ user.profile.photo.url }}{% else %}{% static 'images/avatar.jpeg' %}{% endif %}"
+                        alt="Profile Picture"
+                        class="rounded-circle object-fit-cover d-none d-lg-block"
+                        style="width: 50px; height: 50px"
+                      />
+                    </div>
+                    <p class="text-muted m-0 px-2 px-lg-0 text-center">
+                      <!-- prettier-ignore -->
+                      {% if user.first_name or user.last_name %} {{ user.first_name }} {{ user.last_name }} {% else %} Hello, {{ user.username }} {% endif %}
+                    </p>
+                  </div>
+                </li>
+                <li class="bg-white py-2">
+                  {% if user.is_superuser %}
+                  <a class="dropdown-item" href="{% url 'admin:index' %}"
+                    >Dashboard</a
+                  >
+                  {% endif %}
+                  <a class="dropdown-item" href="{% url 'view_profile' %}"
+                    >Profile</a
+                  >
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#logoutModal"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </li>
+            {% else %}
+            <li class="nav-item ms-lg-3 my-2 my-lg-0 order-lg-5">
+              <a
+                class="btn btn-dark rounded-2 py-2 px-4"
+                href="{% url 'account_login' %}"
+                >Login</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+
+        <!-- tengah -->
+        <div
+          class="d-flex justify-content-start justify-content-lg-center flex-grow-1 order-2 order-lg-1"
+        >
+          <ul class="navbar-nav gap-lg-3">
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.view_name == 'home' %} text-yellow {% else %} text-white-hover {% endif %}"
+                aria-current="page"
+                href="{% url 'home' %}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.view_name == 'aboutus' %} text-yellow {% else %} text-white-hover {% endif %}"
+                href="{% url 'aboutus' %}"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.view_name == 'contactus' %} text-yellow {% else %} text-white-hover {% endif %}"
+                href="{% url 'contactus' %}"
+                >Contact Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.view_name == 'courses_list' or request.resolver_match.view_name == 'courses_detail' or request.resolver_match.view_name == 'quiz_detail' or request.resolver_match.view_name == 'quiz_result' %} text-yellow {% else %} text-white-hover {% endif %}"
+                href="{% url 'courses_list' %}"
+                >Courses</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.resolver_match.view_name == 'news_list' or request.resolver_match.view_name == 'news_detail' %} text-yellow {% else %} text-white-hover {% endif %}"
+                href="{% url 'news_list' %}"
+                >News</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>

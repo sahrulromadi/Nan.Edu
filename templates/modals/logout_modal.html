@@ -1,0 +1,32 @@
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  aria-labelledby="logoutModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-red text-white">
+        <h5 class="modal-title w-100 text-center" id="logoutModalLabel">
+          Konfirmasi Logout
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h5 class="text-center mt-4">Apakah Anda yakin ingin logout?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Batal
+        </button>
+        <a class="btn btn-dark" href="{% url 'account_logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
