@@ -62,20 +62,11 @@
                 </p>
                 <ul class="list-group list-group-flush">
                   <li
-                    class="list-group-item d-flex flew-row justify-content-between align-items-center p-0 fw-semibold"
+                    class="list-group-item d-flex flew-row justify-content-end align-items-center p-0 fw-semibold"
                   >
-                    <div>
-                      <p class="badge bg-warning p-2">Diskon 50%</p>
-                      <p class="text-success">
-                        Rp{{ course.price|floatformat:0|intcomma }}
-                      </p>
-                    </div>
-                    <div>
-                      <p class="text-danger text-decoration-line-through">
-                        <!-- prettier-ignore -->
-                        Rp{{ course.price|floatformat:0|add:course.price|intcomma }}
-                      </p>
-                    </div>
+                    <p class="text-success">
+                      Rp{{ course.price|floatformat:0|intcomma }}
+                    </p>
                   </li>
                   <li
                     class="list-group-item d-flex flew-row justify-content-between align-items-center mt-2 p-0"
