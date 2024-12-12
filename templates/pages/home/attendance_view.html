@@ -1,78 +1,47 @@
 <!-- attendance_view.html -->
-<div class="card shadow-lg mb-4">
-  <div class="card-header text-center bg-primary text-white">
-    <h4 class="card-title">Your Attendance Status</h4>
-  </div>
-  <div class="card-body">
-    <!-- Attendance Message -->
-    <div class="row mb-4">
-      <div class="col-12 text-center">
-        {% if attendance_exists %}
+<div
+  class="d-flex justify-content-center align-items-center position-fixed top-50 start-50 translate-middle z-3 w-100"
+  style="min-height: 100vh"
+>
+  <div class="col-6 card shadow-lg">
+    <div class="card-header bg-red text-white my-auto">
+      <h3 class="text-center m-0">Login Harian</h3>
+    </div>
+    <div class="card-body">
+      <!-- Attendance Progress -->
+      <h5 class="text-center mt-4">
+        Login selama 7 hari untuk mendapatkan course gratis
+      </h5>
+      <div class="d-flex justify-content-center my-5">
+        {% for i in attendance_range %}
         <div
-          class="alert alert-success d-flex align-items-center justify-content-center"
+          class="rounded-circle d-flex align-items-center justify-content-center me-2 {% if i < last_7_days %}bg-success text-white{% else %}bg-secondary text-white{% endif %}"
+          style="width: 50px; height: 50px"
         >
-          <i class="bi bi-check-circle-fill me-2"></i> You have already marked
-          attendance for today.
+          {% if i < last_7_days %}✔{% else %}✖{% endif %}
         </div>
-        {% else %}
-        <div
-          class="alert alert-info d-flex align-items-center justify-content-center"
-        >
-          <i class="bi bi-info-circle-fill me-2"></i> Your attendance has been
-          marked for today.
-        </div>
-        {% endif %}
+        {% endfor %}
+      </div>
+
+      <!-- Reminder Message -->
+      <div
+        class="alert {% if remaining_days_for_access == 0 %}alert-success{% else %}alert-warning{% endif %} text-center"
+      >
+        {% if remaining_days_for_access == 0 %}
+        <strong>Selamat!</strong> Kamu mendapatkan akses ke
+        <strong>Course {{ course.title }}</strong>. {% else %} Kamu butuh
+        <strong>{{ remaining_days_for_access }}</strong> hari lagi untuk
+        mendapatkan course <strong>gratis</strong>. {% endif %}
+      </div>
+
+      <!-- Close Button -->
+      <div class="text-center">
+        <button class="btn btn-secondary" id="close-attendance-card">
+          Close
+        </button>
       </div>
     </div>
-
-    <!-- Days Logged In: 7 Day Boxes -->
-    <div class="row mb-4 justify-content-center">
-      <div class="col-12 text-center">
-        <p><strong>Days logged in for the last 7 days:</strong></p>
-        <div class="d-flex justify-content-center">
-          {% for i in attendance_range %}
-          <div
-            class="attendance-box {% if i < last_7_days %}bg-success{% else %}bg-secondary{% endif %} rounded-circle p-3 mx-2"
-          >
-            {% if i < last_7_days %}
-            <i class="bi bi-check-circle-fill text-white"></i>
-            {% else %}
-            <i class="bi bi-x-circle-fill text-white"></i>
-            {% endif %}
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
-    <!-- Progress Bar for Remaining Days for Access -->
-    <div class="row mb-4">
-      <div class="col-12 text-center">
-        <p><strong>Remaining days to gain access to Course #1:</strong></p>
-        <div class="progress">
-          <div
-            class="progress-bar {% if remaining_days_for_access == 0 %}bg-success{% else %}bg-warning{% endif %}"
-            role="progressbar"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-        <p class="mt-2">
-          {% if remaining_days_for_access == 0 %}
-          <strong>Congratulations!</strong> You've earned access to
-          <strong>Course #1</strong>. {% else %} You need
-          <strong>{{ remaining_days_for_access }}</strong> more day(s) to earn
-          access to <strong>Course #1</strong>. {% endif %}
-        </p>
-      </div>
-    </div>
-
-    <!-- Close Button to Hide Card -->
-    <div class="text-center">
-      <button class="btn btn-secondary" id="close-attendance-card">
-        Close
-      </button>
-    </div>
+    <div class="card-footer bg-red"></div>
   </div>
 </div>
 

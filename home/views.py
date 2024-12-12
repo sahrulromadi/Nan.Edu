@@ -41,7 +41,7 @@ def home(request):
             Attendance.objects.create(user=request.user)
 
         # Jika user sudah login 7 hari berturut-turut, berikan akses ke course ID 1
-        if last_7_days >= 1:
+        if last_7_days >= 7:            
             try:
                 course = Course.objects.get(id=1)  # Ambil course dengan ID 1
                 if not request.user in course.user_has_access.all():
@@ -49,7 +49,7 @@ def home(request):
                     course.save()
             except Course.DoesNotExist:
                 # Tangani jika course dengan ID 1 tidak ditemukan
-                print("Course with ID 1 does not exist.")
+                print("Course dengan ID 1 tidak ada")
         
         # Menggunakan session agar modal hanya muncul sekali
         if not request.session.get('has_logged_in', False):
