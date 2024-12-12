@@ -43,11 +43,13 @@ widget_tweaks %}
 
                   <span class="text-end">
                     {% if radio.emailaddress.verified %}
-                    <span class="badge bg-success">Verified</span>
+                    <span class="badge bg-success">Sudah Terverifikasi</span>
                     {% else %}
-                    <span class="badge bg-warning text-dark">Unverified</span>
+                    <span class="badge bg-warning text-dark"
+                      >Belum Terverifikasi</span
+                    >
                     {% endif %} {% if radio.emailaddress.primary %}
-                    <span class="badge bg-primary">Primary</span>
+                    <span class="badge bg-primary">Utama</span>
                     {% endif %}
                   </span>
                 </div>
@@ -60,14 +62,14 @@ widget_tweaks %}
                 name="action_send"
                 class="btn btn-secondary"
               >
-                Resend Verification
+                Kirim Ulang Verifikasi
               </button>
               <button
                 type="submit"
                 name="action_primary"
                 class="btn btn-primary"
               >
-                Change Primary
+                Ganti Email Utama
               </button>
             </div>
             <div class="d-flex mt-3 justify-content-end">
@@ -77,7 +79,7 @@ widget_tweaks %}
                 value="{{ radio.emailaddress.email }}"
                 class="btn btn-danger btn-sm"
               >
-                Delete
+                Hapus
               </button>
             </div>
           </form>
@@ -91,7 +93,7 @@ widget_tweaks %}
         <!-- prettier-ignore -->
         <div class="card-footer py-3 bg-yellow">
           {% if can_add_email %}
-          <button class="btn btn-dark add-email">Add New Email</button>
+          <button class="btn btn-dark add-email">Tambahkan Email Baru</button>
           <form method="post" action="{% url 'account_email' %}" class="d-none change-email-form mt-4">
             {% csrf_token %}
             <div class="mb-3">
@@ -104,7 +106,7 @@ widget_tweaks %}
               />
             </div>
             <button type="submit" name="action_add" class="btn btn-success mt-1">
-              Add
+              Tambah
             </button>
           </form>
           {% endif %}

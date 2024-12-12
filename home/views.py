@@ -52,7 +52,7 @@ def home(request):
                 print("Course dengan ID 1 tidak ada")
         
         # Jika sudah lebih dari 7 hari maka modal tidak akan muncul lagi. Gunakan session agar muncul setiap setelah login
-        if last_7_days < 7:
+        if last_7_days <= 7:
             if not request.session.get('modal_shown', False):
                 show_modal = True
                 request.session['modal_shown'] = True

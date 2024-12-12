@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<section class="pt-5">
+  <div class="py-5 px-4 px-lg-5">
+    <div
+      class="container d-flex flex-column bg-yellow pt-5 pb-4 px-5 rounded-4 col-12 col-lg-6"
+    >
+      <h1 class="mb-4 fw-bold fs-2 text-center text-break">
+        Konfirmasi Alamat Email
+      </h1>
+      <div class="text-justify fw-lighter lh-sm">
+        <p>
+          Harap konfirmasi bahwa <span class="fw-bold">{{ email }}</span> adalah
+          alamat email untuk pengguna <span class="fw-bold">{{ user }}</span>.
+        </p>
+        <p>
+          Klik tombol di bawah ini untuk menyelesaikan proses konfirmasi email.
+        </p>
+      </div>
+      <form method="post" action="{{ confirmation_url }}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-dark p-2 mt-3 w-100">
+          Konfirmasi
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

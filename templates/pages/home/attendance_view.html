@@ -1,56 +1,65 @@
-<!-- attendance_view.html -->
 <div
-  class="d-flex justify-content-center align-items-center position-fixed top-50 start-50 translate-middle z-3 w-100"
-  style="min-height: 100vh"
+  class="modal fade"
+  id="attendanceModal"
+  tabindex="-1"
+  aria-labelledby="attendanceModalLabel"
+  aria-hidden="true"
 >
-  <div class="col-6 card shadow-lg">
-    <div class="card-header bg-red text-white my-auto">
-      <h3 class="text-center m-0">Login Harian</h3>
-    </div>
-    <div class="card-body">
-      <!-- Attendance Progress -->
-      <h5 class="text-center mt-4">
-        Login selama 7 hari untuk mendapatkan course gratis
-      </h5>
-      <div class="d-flex justify-content-center my-5">
-        {% for i in attendance_range %}
-        <div
-          class="rounded-circle d-flex align-items-center justify-content-center me-2 {% if i < last_7_days %}bg-success text-white{% else %}bg-secondary text-white{% endif %}"
-          style="width: 50px; height: 50px"
-        >
-          {% if i < last_7_days %}✔{% else %}✖{% endif %}
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-red text-white">
+        <h5 class="modal-title w-100 text-center" id="attendanceModalLabel">
+          Login Harian
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <!-- Attendance Progress -->
+        <h5 class="text-center mt-4">
+          Login selama 7 hari untuk mendapatkan course gratis
+        </h5>
+        <div class="d-flex justify-content-center my-5">
+          {% for i in attendance_range %}
+          <div
+            class="rounded-circle d-flex align-items-center justify-content-center me-2 {% if i < last_7_days %}bg-success text-white{% else %}bg-secondary text-white{% endif %}"
+            style="width: 50px; height: 50px"
+          >
+            {% if i < last_7_days %}✔{% else %}✖{% endif %}
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
 
-      <!-- Reminder Message -->
-      <div
-        class="alert {% if remaining_days_for_access == 0 %}alert-success{% else %}alert-warning{% endif %} text-center"
-      >
-        {% if remaining_days_for_access == 0 %}
-        <strong>Selamat!</strong> Kamu mendapatkan akses ke
-        <strong>Course {{ course.title }}</strong>. {% else %} Kamu butuh
-        <strong>{{ remaining_days_for_access }}</strong> hari lagi untuk
-        mendapatkan course <strong>gratis</strong>. {% endif %}
+        <!-- Reminder Message -->
+        <div
+          class="alert {% if remaining_days_for_access == 0 %}alert-success{% else %}alert-warning{% endif %} text-center"
+        >
+          {% if remaining_days_for_access == 0 %}
+          <strong>Selamat!</strong> Kamu mendapatkan akses ke
+          <strong>Course {{ course.title }}</strong>. {% else %} Kamu butuh
+          <strong>{{ remaining_days_for_access }}</strong> hari lagi untuk
+          mendapatkan course <strong>gratis</strong>. {% endif %}
+        </div>
       </div>
-
-      <!-- Close Button -->
-      <div class="text-center">
-        <button class="btn btn-secondary" id="close-attendance-card">
-          Close
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Tutup
         </button>
       </div>
     </div>
-    <div class="card-footer bg-red"></div>
   </div>
 </div>
 
+<!-- Untuk show modal -->
 <script>
-  // Close the attendance card when the close button is clicked
-  document
-    .getElementById("close-attendance-card")
-    .addEventListener("click", function () {
-      const card = document.querySelector(".card");
-      card.style.display = "none"; // Hide the card
-    });
+  document.addEventListener("DOMContentLoaded", function () {
+    var attendanceModal = new bootstrap.Modal(
+      document.getElementById("attendanceModal")
+    );
+    attendanceModal.show();
+  });
 </script>

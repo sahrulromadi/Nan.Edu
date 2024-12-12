@@ -81,6 +81,9 @@ def quiz_result(request, quiz_id):
         quiz_results.delete()
         # Arahkan kembali ke halaman quiz detail
         return redirect('quiz_detail', quiz_id=quiz.id)
+    
+    # Tambahkan kursus terkait ke dalam konteks
+    course = quiz.course
 
     return render(request, 'pages/quiz/quiz_result.html', {
         'quiz': quiz,
@@ -88,4 +91,5 @@ def quiz_result(request, quiz_id):
         'total_score': total_score,
         'correct_answers': correct_answers,
         'wrong_answers': wrong_answers,
+        'course': course,
     })

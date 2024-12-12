@@ -2,6 +2,8 @@ from django.views.generic import ListView, DetailView
 from .models import Course, CourseContent
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 class CoursesListView(ListView):
     model = Course
@@ -38,6 +40,7 @@ class CourseDetailView(DetailView):
     template_name = 'pages/courses/courses_detail.html'
     context_object_name = 'course'
 
+    @method_decorator(login_required(login_url='account_login'))
     def dispatch(self, request, *args, **kwargs):
         course = self.get_object()  
 
