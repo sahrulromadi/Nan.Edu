@@ -51,11 +51,14 @@ def home(request):
                 # Tangani jika course dengan ID 1 tidak ditemukan
                 print("Course dengan ID 1 tidak ada")
         
-        # Menggunakan session agar modal hanya muncul sekali
-        if not request.session.get('has_logged_in', False):
-            show_modal = True
-            # Menandai bahwa user sudah login, agar modal tidak muncul lagi di sesi berikutnya
-            request.session['has_logged_in'] = True
+        # Jika sudah lebih dari 7 hari maka modal tidak akan muncul lagi. Gunakan session agar muncul setiap setelah login
+        if last_7_days < 7:
+            if not request.session.get('modal_shown', False):
+                show_modal = True
+                request.session['modal_shown'] = True
+        else:
+            show_modal = False
+            request.session['modal_shown'] = False
 
     context = {
         'latest_news': latest_news,
