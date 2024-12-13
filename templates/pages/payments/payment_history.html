@@ -1,0 +1,132 @@
+<!-- prettier-ignore -->
+{% extends 'base.html' %} {% block content %} {% load static %} {% load humanize %}
+
+<section class="pt-5">
+  <div class="py-3 py-lg-5 px-lg-0">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="bg-yellow py-4 px-4 px-md-5 rounded-5">
+            <h1 class="text-center mb-4 fw-semibold text-dark">
+              Riwayat Pembelian
+            </h1>
+
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead class="table-light">
+                  <tr class="text-center">
+                    <th>No</th>
+                    <th>Course</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                    <th>Bukti Pembayaran</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if page_obj %} {% for payment in page_obj %}
+                  <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                    <td>{{ payment.course.title }}</td>
+                    <td>Rp{{ payment.amount|floatformat:0|intcomma }}</td>
+                    <td>
+                      {% if payment.status == 'PENDING' %}
+                      <span class="badge bg-warning text-dark"
+                        >{{ payment.get_status_display }}</span
+                      >
+                      {% elif payment.status == 'ACCEPTED' %}
+                      <span class="badge bg-success"
+                        >{{ payment.get_status_display }}</span
+                      >
+                      {% else %}
+                      <span class="badge bg-danger"
+                        >{{ payment.get_status_display }}</span
+                      >
+                      {% endif %}
+                    </td>
+                    <td>{{ payment.created_at|date:"d M Y H:i" }}</td>
+                    <td>
+                      {% if payment.proof_of_payment %}
+                      <a
+                        href="{{ payment.proof_of_payment.url }}"
+                        target="_blank"
+                      >
+                        <img
+                          src="{{ payment.proof_of_payment.url }}"
+                          alt="Bukti Pembayaran"
+                          class="img-fluid"
+                          style="max-width: 100px"
+                        />
+                      </a>
+                      {% else %}
+                      <span class="text-muted">Tidak ada bukti pembayaran</span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %} {% else %}
+                  <tr>
+                    <td colspan="6" class="text-center text-muted">
+                      Tidak ada riwayat pembayaran
+                    </td>
+                  </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center mt-4">
+              <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}"
+                    aria-label="Previous"
+                  >
+                    <span aria-hidden="true">&lt;</span>
+                  </a>
+                </li>
+                {% endif %}
+
+                <!-- Pagination Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                <li
+                  class="page-item {% if num == page_obj.number %}active{% endif %}"
+                >
+                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endfor %} {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.next_page_number }}"
+                    aria-label="Next"
+                  >
+                    <span aria-hidden="true">&gt;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{ page_obj.paginator.num_pages }}"
+                    aria-label="Last"
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

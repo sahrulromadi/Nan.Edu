@@ -130,4 +130,42 @@ $(document).ready(function () {
   $(".add-email").on("click", function () {
     $(".change-email-form").toggleClass("d-none d-block");
   });
+
+  // PAYMENTS
+  const bankAccounts = {
+    BRI: "1234 5678 9101 1121 (a/n NAN.EDU BRI)",
+    BNI: "2345 6789 1011 2233 (a/n NAN.EDU BNI)",
+    Mandiri: "3456 7890 1121 3344 (a/n NAN.EDU Mandiri)",
+    BCA: "4567 8901 2233 4455 (a/n NAN.EDU BCA)",
+  };
+
+  $("#paymentMethod").change(function () {
+    const paymentMethod = $(this).val();
+    const bankInfo = $("#bankInfo");
+    const bankAccount = $("#bankAccount");
+
+    if (bankAccounts[paymentMethod]) {
+      bankInfo.show();
+      bankAccount.text(`Nomor Rekening: ${bankAccounts[paymentMethod]}`);
+    } else {
+      bankInfo.hide();
+      bankAccount.text("");
+    }
+  });
+
+  $("#paymentProof").change(function (event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    if (file) {
+      reader.onload = function (e) {
+        $("#previewImage").attr("src", e.target.result);
+        $("#imagePreview").toggleClass(
+          "d-flex justify-content-center align-items-center"
+        );
+      };
+      reader.readAsDataURL(file);
+    } else {
+      $("#imagePreview").hide();
+    }
+  });
 });

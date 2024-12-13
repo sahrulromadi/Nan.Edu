@@ -1,10 +1,127 @@
-{% extends 'base.html' %}
+<!-- prettier-ignore -->
+{% extends 'base.html' %} {% block content %} {% load static %} {% load humanize %}
 
-{% block content %}
-<h2>Upload Proof of Payment</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+<section class="pt-5">
+  <div class="py-3 py-lg-5 px-lg-0">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="bg-yellow py-4 px-4 px-md-5 rounded-5">
+            <h1 class="text-center mb-4 fw-bold text-dark">Pembayaran</h1>
+            <div class="card border-0 shadow-sm rounded-4">
+              <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <!-- Nama Course -->
+                  <div class="mb-4">
+                    <label for="courseName" class="form-label fw-semibold"
+                      >Nama Course</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control bg-light border-0 py-2 px-3 rounded-3"
+                      id="courseName"
+                      value="{{ course.title }}"
+                      readonly
+                    />
+                  </div>
+
+                  <!-- Harga -->
+                  <div class="mb-4">
+                    <label for="coursePrice" class="form-label fw-semibold"
+                      >Harga</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control bg-light border-0 py-2 px-3 rounded-3"
+                      id="coursePrice"
+                      value="Rp{{ course.price|floatformat:0|intcomma }}"
+                      readonly
+                    />
+                  </div>
+
+                  <!-- Pilih Metode Pembayaran -->
+                  <div class="mb-4">
+                    <label for="paymentMethod" class="form-label fw-semibold"
+                      >Pilih Metode Pembayaran</label
+                    >
+                    <div class="input-group">
+                      <span class="input-group-text bg-white border-0">
+                        <i class="bi bi-credit-card fs-5"></i>
+                      </span>
+                      <select
+                        class="form-select bg-light border-0 py-2 px-3 rounded-end-3"
+                        id="paymentMethod"
+                        onchange="showBankInfo()"
+                      >
+                        <option value="">Pilih Bank</option>
+                        <option value="BRI">Bank BRI</option>
+                        <option value="BNI">Bank BNI</option>
+                        <option value="Mandiri">Bank Mandiri</option>
+                        <option value="BCA">Bank BCA</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Informasi Bank -->
+                  <div
+                    id="bankInfo"
+                    class="bg-light p-3 rounded-3 shadow-sm"
+                    style="display: none"
+                  >
+                    <p class="fw-bold mb-2">
+                      Silakan lakukan pembayaran ke rekening berikut:
+                    </p>
+                    <p id="bankAccount" class="text-muted fs-5"></p>
+                    <p class="text-secondary mb-0">
+                      Setelah melakukan pembayaran, mohon unggah bukti
+                      pembayaran untuk dilakukan verifikasi.
+                    </p>
+                  </div>
+
+                  <!-- Upload Bukti Pembayaran -->
+                  <div class="text-center mt-4">
+                    <label
+                      class="btn btn-dark w-100 py-2 fw-bold rounded-3 shadow-sm"
+                      for="paymentProof"
+                    >
+                      Upload Bukti Pembayaran
+                    </label>
+                    <input
+                      type="file"
+                      id="paymentProof"
+                      name="proof_of_payment"
+                      style="display: none"
+                      accept="image/*"
+                    />
+                  </div>
+                  <!-- Image preview -->
+                  <div id="imagePreview" class="my-3" style="display: none">
+                    <img
+                      id="previewImage"
+                      src="#"
+                      alt="Image Preview"
+                      class="img-fluid"
+                      style="max-width: 200px"
+                    />
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="text-center mt-2">
+                    <button
+                      type="submit"
+                      class="btn btn-dark w-100 py-2 fw-bold rounded-3 shadow-sm"
+                    >
+                      Kirim Pembayaran
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
