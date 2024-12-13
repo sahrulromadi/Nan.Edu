@@ -31,6 +31,12 @@ class CoursesListView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        # Tambahkan informasi akses pengguna ke setiap kursus
+        for course in context['courses_list']:
+            # Tentukan apakah user memiliki akses atau tidak
+            course.has_access = course.user_has_access.filter(id=self.request.user.id).exists()
+            
         context['filter_option'] = self.request.GET.get('filter', 'all')  
         context['search_query'] = self.request.GET.get('search', '')  
         return context

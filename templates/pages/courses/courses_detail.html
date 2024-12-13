@@ -63,7 +63,6 @@
                   <h4 class="mb-4">Deskripsi Kelas</h4>
                   <p class="text-justify">{{ course.description }}</p>
                 </div>
-                {% if course.mentor %}
                 <div class="tab-pane fade" id="instructor">
                   <div class="card border-0 text-center p-3 mb-4">
                     <div class="card-body">
@@ -100,9 +99,6 @@
                     </div>
                   </div>
                 </div>
-                {% else %}
-                <p>Tidak ada mentor</p>
-                {% endif %}
               </div>
             </div>
           </div>

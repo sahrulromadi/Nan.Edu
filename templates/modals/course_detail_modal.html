@@ -1,0 +1,153 @@
+<div
+  class="modal fade"
+  id="courseModal"
+  tabindex="-1"
+  aria-labelledby="courseModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header bg-red text-white">
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="row align-items-center">
+          <!-- Left: Image -->
+          <div class="col-12 col-lg-4 text-center mb-3 mb-lg-0">
+            <img
+              id="modalCourseImage"
+              src=""
+              class="img-fluid object-fit-cover rounded rounded-4"
+              alt="Course Image"
+              style="max-width: 100%; max-height: 350px"
+            />
+          </div>
+          <!-- Right: Content -->
+          <div class="col-12 col-lg-8">
+            <h5 class="text-center mb-4" id="modalCourseTitle"></h5>
+            <!-- Tabs Navigation -->
+            <ul
+              class="nav nav-pills mb-4 justify-content-center justify-content-lg-start"
+            >
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-bs-toggle="pill"
+                  href="#description"
+                  >Deskripsi</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#instructor"
+                  >Mentor</a
+                >
+              </li>
+            </ul>
+            <!-- Tabs Content -->
+            <div class="tab-content">
+              <!-- Deskripsi -->
+              <div class="tab-pane fade show active" id="description">
+                <p id="modalCourseDescription" class="text-justify"></p>
+              </div>
+              <!-- Mentor -->
+              <div class="tab-pane fade" id="instructor">
+                <div class="card border-0 text-center p-0 m-0">
+                  <div class="card-body">
+                    <img
+                      id="modalMentorPhoto"
+                      src=""
+                      alt="Mentor Photo"
+                      class="rounded-circle img-fluid mb-3 object-fit-cover"
+                      style="width: 120px; height: 120px"
+                    />
+                    <h5
+                      class="card-title fw-bold mb-2"
+                      id="modalMentorName"
+                    ></h5>
+                    <p class="text-muted mb-3" id="modalMentorExperience"></p>
+                    <div class="d-flex justify-content-center gap-3">
+                      <a
+                        href="#"
+                        id="modalMentorLinkedIn"
+                        target="_blank"
+                        class="text-primary fs-5"
+                      >
+                        <i class="bi bi-linkedin"></i>
+                      </a>
+                      <a
+                        href="#"
+                        id="modalMentorInstagram"
+                        target="_blank"
+                        class="text-danger fs-5"
+                      >
+                        <i class="bi bi-instagram"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Right Content -->
+        </div>
+      </div>
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <p class="me-auto">
+          <strong>Harga:</strong> Rp<span id="modalCoursePrice"></span>
+        </p>
+        <a href="" id="modalCourseUserHasAccess" class="btn btn-dark"></a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const courseModal = document.getElementById("courseModal");
+  courseModal.addEventListener("show.bs.modal", function (event) {
+    const button = event.relatedTarget;
+
+    const title = button.getAttribute("data-title");
+    const description = button.getAttribute("data-description");
+    const mentorPhoto = button.getAttribute("data-mentor-photo");
+    const mentorName = button.getAttribute("data-mentor-name");
+    const mentorExperience = button.getAttribute("data-mentor-experience");
+    const mentorLinkedIn = button.getAttribute("data-mentor-linkedin");
+    const mentorInstagram = button.getAttribute("data-mentor-instagram");
+    const image = button.getAttribute("data-image");
+    const price = button.getAttribute("data-price");
+    const url = button.getAttribute("data-url");
+    const userHasAccess = button.getAttribute("data-user-has-access");
+
+    // Update modal content
+    document.getElementById("modalCourseTitle").textContent = title;
+    document.getElementById("modalCourseDescription").textContent = description;
+    document.getElementById("modalMentorPhoto").src = mentorPhoto;
+    document.getElementById("modalMentorName").textContent = mentorName;
+    document.getElementById("modalMentorExperience").textContent =
+      mentorExperience;
+    document.getElementById("modalMentorLinkedIn").href = mentorLinkedIn;
+    document.getElementById("modalMentorInstagram").href = mentorInstagram;
+    document.getElementById("modalCourseImage").src = image;
+    document.getElementById("modalCoursePrice").textContent = price;
+
+    const courseLink = document.getElementById("modalCourseUserHasAccess");
+    if (userHasAccess === "True") {
+      courseLink.href = url;
+      courseLink.textContent = "Pergi ke Kursus";
+    } else {
+      courseLink.href = url;
+      courseLink.textContent = "Beli Kursus";
+    }
+  });
+</script>
