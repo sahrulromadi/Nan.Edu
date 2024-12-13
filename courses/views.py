@@ -46,8 +46,8 @@ class CourseDetailView(DetailView):
 
         # Periksa apakah pengguna memiliki akses ke kursus
         if not course.user_has_access.filter(id=self.request.user.id).exists():
-            # Jika tidak memiliki akses, redirect ke halaman home
-            return redirect(reverse('home'))
+            # Jika tidak memiliki akses, redirect ke halaman pembayaran
+            return redirect(reverse('upload_payment', kwargs={'course_id': course.pk}))
 
         return super().dispatch(request, *args, **kwargs)
 
