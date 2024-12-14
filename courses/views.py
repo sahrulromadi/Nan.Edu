@@ -10,7 +10,7 @@ class CoursesListView(ListView):
     template_name = 'pages/courses/courses_list.html'
     context_object_name = 'courses_list'
     ordering = ['-created_at']
-    paginate_by = 6
+    paginate_by = 3
 
     def get_queryset(self):
         user = self.request.user

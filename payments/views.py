@@ -15,11 +15,7 @@ def upload_proof_of_payment(request, course_id):
     if existing_payment:
         if existing_payment.status == Payment.PaymentStatus.PENDING:
             # Jika statusnya PENDING, beri pesan bahwa pembayaran masih dalam proses
-            messages.error(request, 'Status pembayaran kamu masih Pending. Harap menunggu pengecekan dari admin', extra_tags='payments')
             return redirect('payment_history')
-        elif existing_payment.status == Payment.PaymentStatus.REJECTED:
-            # Jika statusnya REJECTED, izinkan mengirim bukti pembayaran lagi
-            messages.info(request, 'Pembayaran kamu ditolak karena tidak sesuai ketentuan',extra_tags='payments')
     
     if request.method == 'POST':
         form = PaymentForm(request.POST, request.FILES)

@@ -17,25 +17,25 @@
                 <div class="btn-group" role="group">
                   <a
                     href="?status=all&search={{ search_query }}"
-                    class="btn btn-filter mb-2 {% if filter_option == 'all' %}active{% endif %}"
+                    class="btn btn-filter mb-2 {% if filter_option == 'all' %}btn-dark{% endif %}"
                   >
                     All
                   </a>
                   <a
                     href="?status=PENDING&search={{ search_query }}"
-                    class="btn btn-filter mb-2 {% if filter_option == 'PENDING' %}active{% endif %}"
+                    class="btn btn-filter mb-2 {% if filter_option == 'PENDING' %}btn-warning{% endif %}"
                   >
                     Pending
                   </a>
                   <a
                     href="?status=ACCEPTED&search={{ search_query }}"
-                    class="btn btn-filter mb-2 {% if filter_option == 'ACCEPTED' %}active{% endif %}"
+                    class="btn btn-filter mb-2 {% if filter_option == 'ACCEPTED' %}btn-success{% endif %}"
                   >
                     Accepted
                   </a>
                   <a
                     href="?status=REJECTED&search={{ search_query }}"
-                    class="btn btn-filter mb-2 {% if filter_option == 'REJECTED' %}active{% endif %}"
+                    class="btn btn-filter mb-2 {% if filter_option == 'REJECTED' %}btn-danger{% endif %}"
                   >
                     Rejected
                   </a>
@@ -53,7 +53,7 @@
                       placeholder="Search..."
                       value="{{ search_query }}"
                     />
-                    <button type="submit" class="btn btn-dark">
+                    <button type="submit" class="input-group-text btn btn-dark">
                       <i class="bi bi-search"></i>
                     </button>
                   </div>

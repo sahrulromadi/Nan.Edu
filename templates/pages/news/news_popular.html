@@ -42,7 +42,7 @@
         <!-- card -->
         {% for news in latest_news %}
         <div class="col-12 col-md-6 col-lg-4">
-          <div class="card shadow-sm mx-auto mt-6">
+          <div class="card shadow-sm mx-auto mt-6 h-100">
             <img
               src="{% if news.image %} {{ news.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
               class="card-img-top object-fit-cover"

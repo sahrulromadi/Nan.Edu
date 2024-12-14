@@ -49,7 +49,7 @@
               placeholder="Search news..."
               value="{{ search_query }}"
             />
-            <button type="submit" class="input-group-text">
+            <button type="submit" class="input-group-text btn btn-dark">
               <i class="bi bi-search"></i>
             </button>
           </div>
@@ -62,7 +62,7 @@
       <div class="row g-4">
         {% for news in news_list %}
         <div class="col-12 col-lg-4">
-          <div class="card shadow-sm mx-auto mt-6">
+          <div class="card shadow-sm mx-auto mt-6 h-100">
             <img
               src="{% if news.image %} {{ news.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
               class="card-img-top object-fit-cover"

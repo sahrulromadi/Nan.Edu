@@ -115,7 +115,7 @@
                 {% for content in contents %}
                 <!-- item -->
                 <a
-                  class="content-item list-group-item list-group-item-action {% if content.id == selected_content.id %}bg-body-secondary border-start border-3 border-primary{% endif %}"
+                  class="content-item list-group-item list-group-item-action {% if content.id == selected_content.id %}bg-body-secondary border-start border-3 border-red{% endif %}"
                   href="{% if content.video %} ?content_id={{ content.id }} {% elif content.quiz %} {% url 'quiz_detail' content.quiz.id %} {% endif %}"
                 >
                   <div class="d-flex align-items-center py-3 mx-4">

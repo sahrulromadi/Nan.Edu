@@ -14,6 +14,37 @@ html {
   text-align: justify;
 }
 
+/* timpa default bootstrap */
+.form-check-input:checked {
+  background-color: #800;
+  border-color: #800;
+}
+.active > .page-link,
+.page-link.active {
+  background-color: #800;
+  border-color: #800;
+}
+.pagination {
+  --bs-pagination-hover-color: #800;
+  --bs-pagination-focus-color: #800;
+}
+.nav-pills .nav-link.active {
+  background-color: #800;
+}
+.nav {
+  --bs-nav-link-color: #800;
+  --bs-nav-link-hover-color: #800;
+}
+.nav-link {
+  color: #800;
+}
+.dropdown-item.active {
+  background-color: #800;
+}
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #800;
+}
+
 /* custom color red */
 .bg-red {
   background-color: #800;
