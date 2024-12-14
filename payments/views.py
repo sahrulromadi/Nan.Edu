@@ -11,11 +11,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def upload_proof_of_payment(request, course_id):
     course = get_object_or_404(Course, id=course_id)
 
-    # Cek apakah user sudah pernah mengirim bukti pembayaran untuk kursus ini dan statusnya masih pending
-    existing_payment = Payment.objects.filter(user=request.user, course=course, status=Payment.PaymentStatus.PENDING).first()
+    existing_payment = Payment.objects.filter(user=request.user, course=course).first()
     if existing_payment:
-        # Jika sudah ada pembayaran dengan status PENDING, arahkan ke riwayat pembayaran
-        return redirect('payment_history')
+        if existing_payment.status == Payment.PaymentStatus.PENDING:
+            # Jika statusnya PENDING, beri pesan bahwa pembayaran masih dalam proses
+            messages.error(request, 'Status pembayaran kamu masih Pending. Harap menunggu pengecekan dari admin', extra_tags='payments')
+            return redirect('payment_history')
+        elif existing_payment.status == Payment.PaymentStatus.REJECTED:
+            # Jika statusnya REJECTED, izinkan mengirim bukti pembayaran lagi
+            messages.info(request, 'Pembayaran kamu ditolak karena tidak sesuai ketentuan',extra_tags='payments')
     
     if request.method == 'POST':
         form = PaymentForm(request.POST, request.FILES)
@@ -26,7 +30,7 @@ def upload_proof_of_payment(request, course_id):
             payment.amount = course.price
             payment.save()
             messages.success(request, 'Payment proof submitted successfully.')
-            return redirect('home')  
+            return redirect('payment_history')  
     else:
         form = PaymentForm()
     return render(request, 'pages/payments/upload_proof.html', {'form': form, 'course': course})
@@ -35,7 +39,7 @@ class PaymentHistoryView(LoginRequiredMixin, ListView):
     model = Payment
     template_name = 'pages/payments/payment_history.html'
     context_object_name = 'payments'
-    paginate_by = 1
+    paginate_by = 5
     ordering = ['-created_at']  
 
     def get_queryset(self):
