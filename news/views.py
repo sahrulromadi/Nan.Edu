@@ -7,6 +7,7 @@ class NewsListView(ListView):
     template_name = 'pages/news/news_list.html'
     context_object_name = 'news_list'
     ordering = ['-created_at']
+    paginate_by = 1
 
     def get_queryset(self):
         queryset = super().get_queryset()

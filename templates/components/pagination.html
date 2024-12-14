@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center mt-4">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page=1&filter={{ filter_option }}&search={{ search_query }}"
+        aria-label="First"
+      >
+        &laquo;
+      </a>
+    </li>
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.previous_page_number }}&filter={{ filter_option }}&search={{ search_query }}"
+        aria-label="Previous"
+      >
+        &lt;
+      </a>
+    </li>
+    {% endif %} {% for num in page_obj.paginator.page_range %}
+    <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+      <a
+        class="page-link"
+        href="?page={{ num }}&filter={{ filter_option }}&search={{ search_query }}"
+        >{{ num }}</a
+      >
+    </li>
+    {% endfor %} {% if page_obj.has_next %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.next_page_number }}&filter={{ filter_option }}&search={{ search_query }}"
+        aria-label="Next"
+      >
+        &gt;
+      </a>
+    </li>
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.paginator.num_pages }}&filter={{ filter_option }}&search={{ search_query }}"
+        aria-label="Last"
+      >
+        &raquo;
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</div>

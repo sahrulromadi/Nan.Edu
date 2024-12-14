@@ -4,7 +4,8 @@ from django.contrib import messages
 from courses.models import Course
 from .models import Payment
 from .forms import PaymentForm
-from django.core.paginator import Paginator
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 @login_required
 def upload_proof_of_payment(request, course_id):
@@ -30,12 +31,32 @@ def upload_proof_of_payment(request, course_id):
         form = PaymentForm()
     return render(request, 'pages/payments/upload_proof.html', {'form': form, 'course': course})
 
-@login_required
-def payment_history(request):
-    payments = Payment.objects.filter(user=request.user).order_by('-created_at')
-    paginator = Paginator(payments, 1)
+class PaymentHistoryView(LoginRequiredMixin, ListView):
+    model = Payment
+    template_name = 'pages/payments/payment_history.html'
+    context_object_name = 'payments'
+    paginate_by = 1
+    ordering = ['-created_at']  
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    return render(request, 'pages/payments/payment_history.html', {'page_obj': page_obj})
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Payment.objects.filter(user=user).order_by('-created_at')
+
+        filter_option = self.request.GET.get('status', 'all')
+        search_query = self.request.GET.get('search', '').strip()
+
+        # Filter berdasarkan status
+        if filter_option != 'all':
+            queryset = queryset.filter(status=filter_option)
+
+        # Pencarian berdasarkan title courses
+        if search_query:
+            queryset = queryset.filter(course__title__icontains=search_query)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_option'] = self.request.GET.get('status', 'all')
+        context['search_query'] = self.request.GET.get('search', '')
+        return context
