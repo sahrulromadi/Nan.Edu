@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<section class="pt-5">
+  <div class="py-3 py-lg-5 px-2 px-lg-0">
+    <div
+      class="container d-flex flex-column alert alert-danger pt-5 pb-4 px-5 rounded-4 col-12 col-lg-6"
+    >
+      <h1 class="mb-4 fw-bold fs-2 text-center text-danger">
+        Halaman Tidak Ditemukan (404)
+      </h1>
+      <div class="text-center fw-lighter lh-sm">
+        <p>
+          Maaf, halaman yang Anda cari tidak ditemukan. Halaman ini mungkin
+          telah dihapus, atau URL yang Anda masukkan salah.
+        </p>
+        <p>
+          Silakan kembali ke halaman utama atau hubungi administrator jika Anda
+          merasa ini adalah kesalahan.
+        </p>
+      </div>
+      <a href="{% url 'home' %}" class="btn btn-dark p-2 mt-3 w-100">
+        Kembali ke Halaman Utama
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
