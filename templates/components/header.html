@@ -129,28 +129,28 @@
               <a
                 class="nav-link {% if request.resolver_match.view_name == 'aboutus' %} text-yellow {% else %} text-white-hover {% endif %}"
                 href="{% url 'aboutus' %}"
-                >About Us</a
+                >Tentang Kami</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link {% if request.resolver_match.view_name == 'contactus' %} text-yellow {% else %} text-white-hover {% endif %}"
                 href="{% url 'contactus' %}"
-                >Contact Us</a
+                >Kontak Kami</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link {% if request.resolver_match.view_name == 'courses_list' or request.resolver_match.view_name == 'courses_detail' or request.resolver_match.view_name == 'quiz_detail' or request.resolver_match.view_name == 'quiz_result' %} text-yellow {% else %} text-white-hover {% endif %}"
                 href="{% url 'courses_list' %}"
-                >Courses</a
+                >Kursus</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link {% if request.resolver_match.view_name == 'news_list' or request.resolver_match.view_name == 'news_detail' %} text-yellow {% else %} text-white-hover {% endif %}"
                 href="{% url 'news_list' %}"
-                >News</a
+                >Berita</a
               >
             </li>
           </ul>

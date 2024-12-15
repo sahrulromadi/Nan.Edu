@@ -21,7 +21,7 @@
       <div class="modal-body">
         <!-- Attendance Progress -->
         <h5 class="text-center mt-4">
-          Login selama 7 hari untuk mendapatkan course gratis
+          Login selama 7 hari untuk mendapatkan Kursus gratis
         </h5>
         <div class="d-flex justify-content-center my-5">
           {% for i in attendance_range %}
@@ -40,9 +40,9 @@
         >
           {% if remaining_days_for_access == 0 %}
           <strong>Selamat!</strong> Kamu mendapatkan akses ke
-          <strong>Course {{ course.title }}</strong>. {% else %} Kamu butuh
+          <strong>Kursus {{ course.title }}</strong>. {% else %} Kamu butuh
           <strong>{{ remaining_days_for_access }}</strong> hari lagi untuk
-          mendapatkan course <strong>gratis</strong>. {% endif %}
+          mendapatkan kursus <strong>gratis</strong>. {% endif %}
         </div>
       </div>
       <div class="modal-footer">

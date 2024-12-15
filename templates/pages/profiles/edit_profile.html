@@ -25,7 +25,7 @@
       </div>
       <!-- cancel end -->
       <div class="card-body">
-        <h5 class="card-title fs-3 mb-4 fw-bold">Profile Pengguna</h5>
+        <h5 class="card-title fs-3 mb-4 fw-bold">Profil Pengguna</h5>
         <form
           action="{% url 'edit_profile' %}"
           method="POST"
@@ -65,12 +65,12 @@
                 {% render_field user_form.username class="form-control" %}
               </div>
               <div class="mb-3">
-                <label class="form-label">First Name</label>
+                <label class="form-label">Nama Depan</label>
                 <!-- prettier-ignore -->
                 {% render_field user_form.first_name class="form-control" placeholder="Masukkan nama depan" %}
               </div>
               <div class="mb-3">
-                <label class="form-label">Last Name</label>
+                <label class="form-label">Nama Belakang</label>
                 <!-- prettier-ignore -->
                 {% render_field user_form.last_name class="form-control" placeholder="Masukkan nama belakang" %}
               </div>
@@ -81,7 +81,7 @@
               Simpan Perubahan
             </button>
             <button type="button" class="btn btn-danger" id="clearBtn">
-              Clear
+              Hapus
             </button>
           </div>
         </form>
