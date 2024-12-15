@@ -40,8 +40,8 @@
         >
           {% if remaining_days_for_access == 0 %}
           <strong>Selamat!</strong> Kamu mendapatkan akses ke
-          <strong>Kursus {{ course.title }}</strong>. {% else %} Kamu butuh
-          <strong>{{ remaining_days_for_access }}</strong> hari lagi untuk
+          <strong>Kursus {{ accessible_course.title }}</strong>. {% else %} Kamu
+          butuh <strong>{{ remaining_days_for_access }}</strong> hari lagi untuk
           mendapatkan kursus <strong>gratis</strong>. {% endif %}
         </div>
       </div>

@@ -1,9 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class Attendance(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='attendances')
-    date = models.DateField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    date = models.DateField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'date'], name='unique_user_date')
+        ]
 
     def __str__(self):
         return f"{self.user.username} - {self.date}"
