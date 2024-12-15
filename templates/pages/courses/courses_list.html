@@ -6,7 +6,7 @@
   <div class="py-3 py-lg-5 px-0">
     <div class="container d-flex flex-column gap-5">
       <!-- Title -->
-      <h1 class="text-center text-red fw-bolder">List Courses</h1>
+      <h1 class="text-center text-red fw-bolder">Daftar Kursus</h1>
 
       <!-- Search dan Filter -->
       <div class="d-flex align-items-center justify-content-center">
@@ -27,7 +27,7 @@
                 class="dropdown-item {% if filter_option == 'all' %}active{% endif %}"
                 href="?filter=all&search={{ search_query }}"
               >
-                Semua Courses
+                Semua Kursus
               </a>
             </li>
             {% if user.is_authenticated %}
@@ -36,7 +36,7 @@
                 class="dropdown-item {% if filter_option == 'owned' %}active{% endif %}"
                 href="?filter=owned&search={{ search_query }}"
               >
-                Courses Saya
+                Kursus Saya
               </a>
             </li>
             {% endif %}
@@ -51,7 +51,7 @@
               type="text"
               name="search"
               class="form-control"
-              placeholder="Search courses..."
+              placeholder="Cari Kursus..."
               value="{{ search_query }}"
             />
             <button type="submit" class="input-group-text">
@@ -121,7 +121,7 @@
           </a>
         </div>
         {% empty %}
-        <div class="alert alert-danger p-4 fs-5">Tidak ada courses</div>
+        <div class="alert alert-danger p-4 fs-5">Tidak ada Kursus</div>
         {% endfor %}
       </div>
 
