@@ -8,6 +8,12 @@ from news.models import News
 def home(request):
     latest_news = News.objects.order_by('-created_at')[:5]
     latest_courses = Course.objects.order_by('-created_at')[:5]
+    
+    # Tentukan apakah pengguna memiliki akses untuk setiap kursus
+    if request.user.is_authenticated:
+        for course in latest_courses:
+            # Tambahkan atribut `has_access` untuk setiap kursus
+            course.has_access = course.user_has_access.filter(id=request.user.id).exists()
 
     attendance_exists = False
     last_7_days = 0
