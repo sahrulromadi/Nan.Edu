@@ -88,3 +88,34 @@ Setelah semua konfigurasi selesai, Anda dapat menjalankan server lokal untuk men
 ```
 python manage.py runserver
 ```
+
+## Screenshots
+
+### Tampilan Web
+<table style="width: 100%; table-layout: fixed; border-spacing: 20px;">
+  <tr>
+    <td style="border: 2px solid #e0e0e0; border-radius: 10px; text-align: center; padding: 15px; background: #f9f9f9;">
+      <img src="https://github.com/user-attachments/assets/7437d270-5ade-469d-a573-4751e3bd8e1e" alt="Home" style="width: 100%; border-radius: 8px;">
+      <h3 style="margin-top: 10px; font-family: Arial, sans-serif; color: #333;">Home</h3>
+    </td>
+    <td style="border: 2px solid #e0e0e0; border-radius: 10px; text-align: center; padding: 15px; background: #f9f9f9;">
+      <img src="https://github.com/user-attachments/assets/89736fa9-3fc4-435d-af0b-3bf1b88d7dc7" alt="Kursus" style="width: 100%; border-radius: 8px;">
+      <h3 style="margin-top: 10px; font-family: Arial, sans-serif; color: #333;">Kursus</h3>
+    </td>
+  </tr>
+</table>
+
+### Tampilan Mobile
+<table style="width: 100%; table-layout: fixed; border-spacing: 20px;">
+  <tr>
+    <td style="border: 2px solid #e0e0e0; border-radius: 10px; text-align: center; padding: 15px; background: #f9f9f9;">
+      <img src="https://github.com/user-attachments/assets/e3578b33-b453-4d33-83c2-66ed0f8fc262" alt="Semua Berita" style="width: 100%; border-radius: 8px;">
+      <h3 style="margin-top: 10px; font-family: Arial, sans-serif; color: #333;">Semua Berita</h3>
+    </td>
+    <td style="border: 2px solid #e0e0e0; border-radius: 10px; text-align: center; padding: 15px; background: #f9f9f9;">
+      <img src="https://github.com/user-attachments/assets/ebeab345-1b58-4629-bf46-131203201b35" alt="Semua Kursus" style="width: 100%; border-radius: 8px;">
+      <h3 style="margin-top: 10px; font-family: Arial, sans-serif; color: #333;">Rekomendasi Kursus</h3>
+    </td>
+  </tr>
+</table>
+
