@@ -84,7 +84,10 @@
             data-url="{% url 'courses_detail' course.pk %}"
             data-user-has-access="{{ course.has_access }}"
           >
-            <div class="card rounded rounded-top-4" style="min-width: 18rem">
+            <div
+              class="card rounded rounded-top-4 h-100"
+              style="min-width: 18rem"
+            >
               <img
                 src="{% if course.image %} {{ course.image.url }} {% else %} {% static 'images/img-not-found.png' %} {% endif %}"
                 class="card-img-top object-fit-cover rounded-4"
