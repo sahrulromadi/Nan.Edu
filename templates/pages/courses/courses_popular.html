@@ -16,33 +16,36 @@
         </a>
       </p>
     </div>
+
+    <!-- Slider Kursus -->
     <div
+      id="course-slider"
       class="course-grid position-relative slider-grid"
-      style="overflow-x: hidden; transition: transform 0.5s ease-in-out"
+      style="overflow-x: hidden"
     >
       {% if latest_courses %}
-      <!-- button -->
+      <!-- Tombol Navigasi -->
       <button
+        id="prev-course-btn"
         class="btn btn-dark rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
-        id="prev-btn"
         style="width: 35px; height: 35px"
       >
         <i class="bi bi-arrow-left"></i>
       </button>
       <button
+        id="next-course-btn"
         class="btn btn-dark rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
-        id="next-btn"
         style="width: 35px; height: 35px"
       >
         <i class="bi bi-arrow-right"></i>
       </button>
-      <!-- button end -->
+      <!-- Tombol Navigasi Selesai -->
       {% endif %}
       <div
         class="row flex-nowrap slider-row"
         style="transition: transform 0.5s ease-in-out"
       >
-        <!-- card -->
+        <!-- Kartu Kursus -->
         {% for course in latest_courses %}
         <div class="col-12 col-md-6 col-lg-4">
           <a
@@ -84,8 +87,8 @@
                     class="list-group-item d-flex flew-row justify-content-between align-items-center mt-2 p-0"
                   >
                     <p class="fw-semi-bold">
-                      <i class="bi bi-star-fill fs-5 text-warning"></i
-                      ><span class="ms-2"></span>5.0
+                      <i class="bi bi-star-fill fs-5 text-warning"></i>
+                      <span class="ms-2"></span>5.0
                     </p>
                     <p>
                       <i class="bi bi-people fs-5"></i>
@@ -98,9 +101,9 @@
           </a>
         </div>
         {% empty %}
-        <div class="alert alert-danger p-4 fs-5">Tidak ada Kursus terbaru</div>
+        <div class="alert alert-danger p-4 fs-5">Tidak ada kursus terbaru</div>
         {% endfor %}
-        <!-- card end -->
+        <!-- Kartu Kursus Selesai -->
       </div>
     </div>
   </div>

@@ -1,171 +1,173 @@
 $(document).ready(function () {
   // NAVBAR
-  $(window).on("scroll", function () {
-    const navbar = $("header");
-    // jika scroll lebih dari 5 pixel
-    if ($(this).scrollTop() > 5) {
-      navbar.css("opacity", "0.9"); // ubah opacity
-    } else {
-      navbar.css("opacity", "1"); // kembalikan opacity
-    }
-  });
+  (function setupNavbarOpacity() {
+    $(window).on("scroll", function () {
+      const navbar = $("header");
+      navbar.css("opacity", $(this).scrollTop() > 5 ? "0.9" : "1");
+    });
+  })();
 
-  // FORM
-  $(".needs-validation").on("submit", function (event) {
-    // cek validasi apakah semua input dalam form valid sesuai aturan HTML
-    if (!this.checkValidity()) {
-      // mencegah tindakan default dari event listener submit
-      event.preventDefault();
-    }
-    // class dari bootstrap untuk menampilkan elemen validasi
-    $(this).addClass("was-validated");
-  });
+  // FORM VALIDATION
+  (function setupFormValidation() {
+    $(".needs-validation").on("submit", function (event) {
+      if (!this.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      $(this).addClass("was-validated");
+    });
+  })();
 
   // SCROLL TO TOP
-  // menampilkan tombol ketika scroll ke bawah
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 250) {
-      $("#scrollToTop").removeClass("d-none"); // tampilkan tombol
-    } else {
-      $("#scrollToTop").addClass("d-none"); // sembunyikan tombol
-    }
-  });
+  (function setupScrollToTop() {
+    const $scrollToTop = $("#scrollToTop");
+    $(window).on("scroll", function () {
+      $(this).scrollTop() > 250
+        ? $scrollToTop.removeClass("d-none")
+        : $scrollToTop.addClass("d-none");
+    });
 
-  // scroll ke atas saat tombol diklik
-  $("#scrollToTop").click(function () {
-    $("html, body").scrollTop(0); // scroll ke atas
-    return false; // mencegah form dikirim secara default
-  });
+    $scrollToTop.on("click", function () {
+      $("html, body").animate({ scrollTop: 0 }, "fast");
+    });
+  })();
 
   // FAQ
-  // ambil semua pertanyaan dengan class faq-item
-  $(".faq-item").each(function () {
-    const $q = $(this); // simpan referensi
-    const $answer = $q.find(".faq-answer");
-    const $icon = $q.find(".faq-question i");
+  (function setupFaqToggle() {
+    $(".faq-item").on("click", function () {
+      const $answer = $(this).find(".faq-answer");
+      const $icon = $(this).find(".faq-question i");
+      $answer.slideToggle();
+      $icon.toggleClass("bi-plus bi-dash");
+    });
+  })();
 
-    // event listener ketika faq-item diklik
-    $q.on("click", function () {
-      // cek apakah display === none
-      if ($answer.css("display") === "none") {
-        $answer.slideDown(); // tampilkan jawaban + transisi
-        $icon.removeClass("bi-plus").addClass("bi-dash"); // ganti ikon
-      } else {
-        $answer.slideUp(); // sembunyikan jawaban + transisi
-        $icon.removeClass("bi-dash").addClass("bi-plus");
+  // FORM ERROR MODAL
+  (function setupFormErrors() {
+    if ($("#formErrors").data("errors")) {
+      const myModal = new bootstrap.Modal(
+        document.getElementById("exampleModal")
+      );
+      myModal.show();
+    }
+  })();
+
+  // PROFILE PHOTO
+  (function setupProfilePhoto() {
+    const initialImageSrc = $("#profile-photo-preview").attr("src");
+
+    $("#profile-photo-input").on("change", function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          $("#profile-photo-preview").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(file);
       }
     });
-  });
 
-  // FORM ERROR
-  if ($("#formErrors").data("errors") === true) {
-    var myModal = new bootstrap.Modal(document.getElementById("exampleModal"));
-    myModal.show();
-  }
+    $("#clearBtn").on("click", function () {
+      $(this).closest("form")[0].reset();
+      $("#profile-photo-preview").attr("src", initialImageSrc);
+    });
+  })();
 
-  // PROFILE
-  // ambil gambar awal preview
-  let initialImageSrc = $("#profile-photo-preview").attr("src");
+  // Fungsi slider dinamis
+  function setupSlider(sliderId, prevBtnId, nextBtnId) {
+    let currentIndex = 0;
 
-  // Preview Foto saat dipilih
-  $("#profile-photo-input").on("change", function (event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        $("#profile-photo-preview").attr("src", e.target.result); // Update preview image
+    // Ambil elemen slider dan card
+    const $sliderRow = $(`#${sliderId} .slider-row`);
+    const $slider = $(`#${sliderId}`);
+    const $cards = $sliderRow.find(".col-12");
+
+    // Hitung ukuran card dan jumlah maksimal index
+    const updateSliderConfig = () => {
+      const cardWidth = $cards.outerWidth(true);
+      const visibleCards = Math.floor($slider.outerWidth() / cardWidth);
+      return {
+        cardWidth,
+        maxIndex: $cards.length - visibleCards,
       };
-      reader.readAsDataURL(file);
+    };
+
+    let { cardWidth, maxIndex } = updateSliderConfig();
+
+    // Fungsi untuk geser ke kanan
+    function slideNext() {
+      currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0; // Reset jika sudah di akhir
+      $sliderRow.css("transform", `translateX(-${currentIndex * cardWidth}px)`);
     }
-  });
 
-  // Clear Button
-  $("#clearBtn").on("click", function () {
-    // Reset form terdekat dari tombol yang diklik
-    $(this).closest("form")[0].reset();
-
-    // Reset preview gambar
-    $("#profile-photo-preview").attr("src", initialImageSrc);
-  });
-
-  // SLIDER
-  let currentIndex = 0;
-  const cardWidth = $(".slider-row .col-12").outerWidth(true);
-  const totalCards = $(".slider-row .col-12").length;
-  const maxIndex = totalCards - 3; // Jumlah card yang dapat terlihat sekaligus (ubah sesuai kebutuhan)
-
-  // Fungsi untuk geser ke kanan
-  function slideNext() {
-    if (currentIndex < maxIndex) {
-      currentIndex++;
-    } else {
-      currentIndex = 0; // Reset ke awal jika sudah mencapai akhir
+    // Fungsi untuk geser ke kiri
+    function slidePrev() {
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex; // Reset ke akhir jika di awal
+      $sliderRow.css("transform", `translateX(-${currentIndex * cardWidth}px)`);
     }
-    $(".slider-row").css(
-      "transform",
-      `translateX(-${currentIndex * cardWidth}px)`
-    );
+
+    // Event tombol
+    $(`#${nextBtnId}`).click(slideNext);
+    $(`#${prevBtnId}`).click(slidePrev);
+
+    // Update konfigurasi saat window di-resize
+    $(window).resize(() => {
+      const config = updateSliderConfig();
+      cardWidth = config.cardWidth;
+      maxIndex = config.maxIndex;
+      currentIndex = Math.min(currentIndex, maxIndex); // Pastikan index tidak lebih dari maxIndex
+      $sliderRow.css("transform", `translateX(-${currentIndex * cardWidth}px)`);
+    });
   }
 
-  // Fungsi untuk geser ke kiri
-  function slidePrev() {
-    if (currentIndex > 0) {
-      currentIndex--;
-    } else {
-      currentIndex = maxIndex; // Reset ke akhir jika sudah di awal
-    }
-    $(".slider-row").css(
-      "transform",
-      `translateX(-${currentIndex * cardWidth}px)`
-    );
-  }
-
-  // Event tombol next
-  $("#next-btn").click(slideNext);
-
-  // Event tombol previous
-  $("#prev-btn").click(slidePrev);
+  // Inisialisasi slider
+  $(document).ready(function () {
+    setupSlider("news-slider", "prev-news-btn", "next-news-btn");
+    setupSlider("course-slider", "prev-course-btn", "next-course-btn");
+  });
 
   // CHANGE EMAIL
-  $(".add-email").on("click", function () {
-    $(".change-email-form").toggleClass("d-none d-block");
-  });
+  (function setupChangeEmail() {
+    $(".add-email").on("click", function () {
+      $(".change-email-form").toggleClass("d-none d-block");
+    });
+  })();
 
   // PAYMENTS
-  const bankAccounts = {
-    BRI: "1234 5678 9101 1121 (a/n NAN.EDU BRI)",
-    BNI: "2345 6789 1011 2233 (a/n NAN.EDU BNI)",
-    Mandiri: "3456 7890 1121 3344 (a/n NAN.EDU Mandiri)",
-    BCA: "4567 8901 2233 4455 (a/n NAN.EDU BCA)",
-  };
+  (function setupPayments() {
+    const bankAccounts = {
+      BRI: "1234 5678 9101 1121 (a/n NAN.EDU BRI)",
+      BNI: "2345 6789 1011 2233 (a/n NAN.EDU BNI)",
+      Mandiri: "3456 7890 1121 3344 (a/n NAN.EDU Mandiri)",
+      BCA: "4567 8901 2233 4455 (a/n NAN.EDU BCA)",
+    };
 
-  $("#paymentMethod").change(function () {
-    const paymentMethod = $(this).val();
-    const bankInfo = $("#bankInfo");
-    const bankAccount = $("#bankAccount");
+    $("#paymentMethod").on("change", function () {
+      const paymentMethod = $(this).val();
+      const $bankInfo = $("#bankInfo");
+      const $bankAccount = $("#bankAccount");
 
-    if (bankAccounts[paymentMethod]) {
-      bankInfo.show();
-      bankAccount.text(`Nomor Rekening: ${bankAccounts[paymentMethod]}`);
-    } else {
-      bankInfo.hide();
-      bankAccount.text("");
-    }
-  });
+      if (bankAccounts[paymentMethod]) {
+        $bankInfo.show();
+        $bankAccount.text(`Nomor Rekening: ${bankAccounts[paymentMethod]}`);
+      } else {
+        $bankInfo.hide();
+        $bankAccount.text("");
+      }
+    });
 
-  $("#paymentProof").change(function (event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    if (file) {
-      reader.onload = function (e) {
-        $("#previewImage").attr("src", e.target.result);
-        $("#imagePreview").toggleClass(
-          "d-flex justify-content-center align-items-center"
-        );
-      };
-      reader.readAsDataURL(file);
-    } else {
-      $("#imagePreview").hide();
-    }
-  });
+    $("#paymentProof").on("change", function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          $("#previewImage").attr("src", e.target.result);
+          $("#imagePreview").addClass("d-flex").removeClass("d-none");
+        };
+        reader.readAsDataURL(file);
+      } else {
+        $("#imagePreview").addClass("d-none").removeClass("d-flex");
+      }
+    });
+  })();
 });

@@ -13,33 +13,35 @@
         </a>
       </p>
     </div>
+
     <div
+      id="news-slider"
       class="news-grid position-relative slider-grid"
-      style="overflow-x: hidden; transition: transform 0.5s ease-in-out"
+      style="overflow-x: hidden"
     >
       {% if latest_news %}
-      <!-- button -->
+      <!-- Tombol Navigasi -->
       <button
+        id="prev-news-btn"
         class="btn btn-dark rounded-circle position-absolute top-50 start-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
-        id="prev-btn"
         style="width: 35px; height: 35px"
       >
         <i class="bi bi-arrow-left"></i>
       </button>
       <button
+        id="next-news-btn"
         class="btn btn-dark rounded-circle position-absolute top-50 end-0 translate-middle-y z-3 d-flex align-items-center justify-content-center shadow"
-        id="next-btn"
         style="width: 35px; height: 35px"
       >
         <i class="bi bi-arrow-right"></i>
       </button>
-      <!-- button end -->
+      <!-- Tombol Navigasi Selesai -->
       {% endif %}
       <div
         class="row flex-nowrap slider-row"
         style="transition: transform 0.5s ease-in-out"
       >
-        <!-- card -->
+        <!-- Kartu Berita -->
         {% for news in latest_news %}
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card shadow-sm mx-auto mt-6 h-100">
@@ -70,7 +72,7 @@
         {% empty %}
         <div class="alert alert-danger p-4 fs-5">Tidak ada berita terbaru</div>
         {% endfor %}
-        <!-- card end -->
+        <!-- Kartu Berita Selesai -->
       </div>
     </div>
   </div>
