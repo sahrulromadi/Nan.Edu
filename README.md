@@ -6,10 +6,10 @@ Nan.Edu adalah platform e-learning yang berfokus pada pengembangan pengetahuan d
 
 ## Fitur
 
-1. Course -> Menyediakan berbagai kursus yang dirancang untuk membantu pengguna memahami konsep-konsep dasar hingga tingkat lanjut dalam bidang keuangan.
+1. Kursus -> Menyediakan berbagai kursus yang dirancang untuk membantu pengguna memahami konsep-konsep dasar hingga tingkat lanjut dalam bidang keuangan.
 2. Quiz -> Fitur ujian interaktif yang memungkinkan pengguna menguji pemahaman mereka tentang materi yang telah dipelajari.
 3. Video -> Menyediakan video tutorial dan materi pembelajaran visual yang memudahkan pengguna dalam memahami topik-topik yang dibahas.
-4. News -> Menyediakan pembaruan terkini terkait dunia keuangan, termasuk artikel, tips, dan perkembangan terbaru di industri.
+4. Berita -> Menyediakan berita terkini terkait dunia keuangan, termasuk artikel, tips, dan perkembangan terbaru di industri.
 
 ## Anggota Kelompok
 
